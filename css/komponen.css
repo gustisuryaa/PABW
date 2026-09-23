@@ -1,0 +1,136 @@
+/* ==================================================================
+   KOMPONEN.CSS — Lembar G: form, fokus, isian tidak sah + gaya
+   untuk tiga struktur tambahan (details, dl, ol/time)
+   ================================================================== */
+
+/* ---- Tabel ---- */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+caption {
+  text-align: left;
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+th, td {
+  text-align: left;
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ---- Form ---- */
+form fieldset {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+form legend {
+  font-weight: 700;
+  padding-inline: var(--space-2);
+}
+form p {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: none; /* form kolom tidak dibatasi 60ch seperti paragraf isi */
+}
+
+label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+input, textarea, button {
+  font: inherit; /* kolom isian ikut ukuran huruf halaman */
+}
+
+input, textarea {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-fg);
+}
+
+#nim-bantuan {
+  font-size: var(--text-sm);
+  color: var(--color-fg);
+}
+
+button {
+  align-self: flex-start;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: #FFFFFF;
+  cursor: pointer;
+}
+button:hover { filter: brightness(1.1); }
+
+/* ---- Keadaan fokus: wajib terlihat untuk navigasi papan ketik ---- */
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* ---- Isian tidak sah: HANYA setelah disentuh pengguna ---- */
+input:user-invalid {
+  border-color: var(--color-danger);
+  border-width: 2px;
+}
+
+/* ==================================================================
+   Struktur tambahan (Lembar B.3)
+   ================================================================== */
+
+/* Pilihan 3 — lini masa (#lini-masa) */
+.lini {
+  list-style: none;
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.lini time {
+  font-weight: 700;
+  color: var(--color-primary);
+  display: block;
+}
+
+/* Pilihan 4 — keterampilan (#keterampilan) */
+.keterampilan {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.keterampilan dt {
+  font-weight: 700;
+}
+.keterampilan dd {
+  margin-inline-start: var(--space-4);
+  color: var(--color-fg);
+}
+
+/* Pilihan 1 — tanya jawab (#tanya-jawab) */
+#tanya-jawab details {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+}
+#tanya-jawab details + details {
+  margin-top: var(--space-2);
+}
+#tanya-jawab summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+#tanya-jawab summary::marker {
+  color: var(--color-primary);
+}
