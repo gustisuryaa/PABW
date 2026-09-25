@@ -45,6 +45,7 @@
   --color-primary: var(--navy-700);
   --color-danger:  var(--red-700);
   --color-focus:   var(--amber-700);
+  --color-on-primary: #FFFFFF;
 
   --card-pad:    var(--space-4);
   --section-gap: var(--space-6);

@@ -12,7 +12,8 @@
     --color-border:  #334155;
     --color-primary: #7DA9F7; /* versi lebih terang dari navy-700 agar tetap kontras */
     --color-danger:  #FF8A8A;
-    --color-focus:   #FFC107; /* gold-400: 11:1 di atas latar navy gelap */
+    --color-focus:   #FFC107; 
+    --color-on-primary: var(--gray-900);/* gold-400: 11:1 di atas latar navy gelap */
     --shadow-1:      var(--shadow-1-gelap);
   }
 }
@@ -47,5 +48,6 @@
   --color-primary: #7DA9F7;
   --color-danger:  #FF8A8A;
   --color-focus:   #FFC107;
+  --color-on-primary: var(--gray-900);
   --shadow-1:      var(--shadow-1-gelap);
 }

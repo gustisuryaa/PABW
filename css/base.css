@@ -37,7 +37,7 @@ a { color: var(--color-primary); }
   left: -9999px;
   top: 0;
   background: var(--color-primary);
-  color: #FFFFFF;
+  color: var(--color-on-primary); 
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-md);
   z-index: 10;

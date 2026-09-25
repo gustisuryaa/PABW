@@ -51,3 +51,34 @@ diselesaikan di luar kelas sampai pukul 23.59 hari yang sama.
 Folder `worksheet-p4/` di dalam repositori GitHub Anda sendiri, berisi
 `profil.html`, `css/`, `media/`, dan `bukti/`. Sudah di-commit dan di-push
 sebelum **pukul 23.59 hari yang sama**. Tidak ada perpanjangan.
+
+## Pertemuan 4 — Arah visual halaman profil
+
+Arah visual: Tegas dan teknis.
+Warna utama: #1E3A8A (navy), diturunkan dari foto profil sementara
+(ilustrasi grafik batang navy/putih/kuning keemasan).
+Warna fokus dibedakan dari warna utama: amber #B45309 di tema terang,
+kuning emas #FFC107 di tema gelap — dipilih khusus supaya kontras
+garis fokus tetap tinggi di kedua tema.
+Berkas gaya: tokens.css, base.css, layout.css, komponen.css, tema.css.
+Kriteria selesai: mengubah --navy-700 di satu baris mengubah warna
+tombol, tautan, dan garis fokus utama.
+
+## Design token halaman profil
+
+- Berkas gaya: tokens.css, base.css, layout.css, komponen.css, tema.css
+- Warna utama: #1E3A8A (navy), dari foto profil sementara
+
+| Token | Nilai | Untuk apa |
+|---|---|---|
+| --color-primary | #1E3A8A | tombol, tautan, penanda |
+| --color-focus | #B45309 (terang) / #FFC107 (gelap) | garis fokus papan ketik |
+| --color-fg | #0F172A | warna teks utama |
+| --color-bg | #F8FAFC | latar halaman |
+| --radius-md | 0.5rem | sudut tombol dan kartu |
+| --space-4 | 1rem | jarak standar antar elemen |
+
+Kriteria selesai: mengubah --navy-700 di satu baris mengubah tombol,
+tautan, dan judul (catatan: judul saat ini memakai --color-fg, bukan
+--color-primary — dipilih sengaja agar teks isi tetap netral dan tidak
+terlalu ramai warna).
