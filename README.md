@@ -82,3 +82,24 @@ Kriteria selesai: mengubah --navy-700 di satu baris mengubah tombol,
 tautan, dan judul (catatan: judul saat ini memakai --color-fg, bukan
 --color-primary — dipilih sengaja agar teks isi tetap netral dan tidak
 terlalu ramai warna).
+
+## Tujuan struktur tambahan
+
+**Perjalanan saya (#lini-masa)** — memakai `<ol>` dan `<time>` karena urutannya
+bermakna secara kronologis. Ditujukan untuk pembaca yang ingin melihat
+perkembangan saya dari mulai kuliah sampai kompetisi terbaru; menjawab
+pertanyaan "bagaimana perjalanan saya sampai di titik ini".
+
+**Keterampilan (#keterampilan)** — memakai `<dl>`, `<dt>`, `<dd>` untuk
+memetakan pasangan nama kemampuan dan penjelasannya. Ditujukan untuk pembaca
+yang ingin cepat menilai kompetensi saya (misalnya dosen atau rekruter);
+menjawab pertanyaan "apa saja yang saya kuasai".
+
+**Tanya jawab (#tanya-jawab)** — memakai `<details>` dan `<summary>` yang
+interaktif tanpa JavaScript. Ditujukan untuk pembaca yang ingin mengenal saya
+secara singkat; menjawab pertanyaan umum seputar hal yang saya pelajari, alat
+yang saya pakai, dan arah karier saya.
+
+## Catatan penggunaan AI
+[Isi jujur: bagian mana yang dibantu AI dan bagian mana yang kamu kerjakan
+sendiri, atau tulis "tidak memakai AI".]
