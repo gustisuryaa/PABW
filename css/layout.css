@@ -64,6 +64,23 @@ main > section {
   gap: var(--space-3);
 }
 
+/* tambahkan di layout.css, dekat aturan main > section */
+.profil-utama {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.profil-utama .foto {
+  flex: 0 0 auto;
+  width: 12rem;
+}
+.profil-utama p {
+  flex: 1 1 24rem;
+  max-width: none; /* lepas dari batas 60ch section umum */
+}
+
+
 /* ---- Katalog kartu: dipakai ulang pada daftar "Karya saya" ---- */
 .katalog {
   display: flex;
