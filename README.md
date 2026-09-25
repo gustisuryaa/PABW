@@ -100,9 +100,6 @@ interaktif tanpa JavaScript. Ditujukan untuk pembaca yang ingin mengenal saya
 secara singkat; menjawab pertanyaan umum seputar hal yang saya pelajari, alat
 yang saya pakai, dan arah karier saya.
 
-## Catatan penggunaan AI
-[Isi jujur: bagian mana yang dibantu AI dan bagian mana yang kamu kerjakan
-sendiri, atau tulis "tidak memakai AI".]
 
 ## Catatan penggunaan AI
 
