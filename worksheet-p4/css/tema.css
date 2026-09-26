@@ -51,3 +51,15 @@
   --color-on-primary: var(--gray-900);
   --shadow-1:      var(--shadow-1-gelap);
 }
+
+:root:not(:has(#tema:checked)) {
+  --color-bg:      var(--gray-50);
+  --color-fg:      var(--gray-900);
+  --color-surface: #FFFFFF;
+  --color-border:  var(--gray-200);
+  --color-primary: var(--navy-700);
+  --color-danger:  var(--red-700);
+  --color-focus:   var(--amber-700);
+  --color-on-primary: #FFFFFF;
+  --shadow-1:      0 1px 3px rgba(0, 0, 0, .10);
+}
