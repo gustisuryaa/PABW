@@ -58,7 +58,7 @@ Arah visual: Tegas dan teknis.
 Warna utama: #1E3A8A (navy), diturunkan dari foto profil sementara
 (ilustrasi grafik batang navy/putih/kuning keemasan).
 Warna fokus dibedakan dari warna utama: amber #B45309 di tema terang,
-kuning emas #FFC107 di tema gelap — dipilih khusus supaya kontras
+kuning emas #FFC107 di tema gelap dipilih khusus supaya kontras
 garis fokus tetap tinggi di kedua tema.
 Berkas gaya: tokens.css, base.css, layout.css, komponen.css, tema.css.
 Kriteria selesai: mengubah --navy-700 di satu baris mengubah warna
@@ -85,17 +85,17 @@ terlalu ramai warna).
 
 ## Tujuan struktur tambahan
 
-**Perjalanan saya (#lini-masa)** — memakai `<ol>` dan `<time>` karena urutannya
+**Perjalanan saya (#lini-masa)** memakai `<ol>` dan `<time>` karena urutannya
 bermakna secara kronologis. Ditujukan untuk pembaca yang ingin melihat
 perkembangan saya dari mulai kuliah sampai kompetisi terbaru; menjawab
 pertanyaan "bagaimana perjalanan saya sampai di titik ini".
 
-**Keterampilan (#keterampilan)** — memakai `<dl>`, `<dt>`, `<dd>` untuk
+**Keterampilan (#keterampilan)** memakai `<dl>`, `<dt>`, `<dd>` untuk
 memetakan pasangan nama kemampuan dan penjelasannya. Ditujukan untuk pembaca
 yang ingin cepat menilai kompetensi saya (misalnya dosen atau rekruter);
 menjawab pertanyaan "apa saja yang saya kuasai".
 
-**Tanya jawab (#tanya-jawab)** — memakai `<details>` dan `<summary>` yang
+**Tanya jawab (#tanya-jawab)** memakai `<details>` dan `<summary>` yang
 interaktif tanpa JavaScript. Ditujukan untuk pembaca yang ingin mengenal saya
 secara singkat; menjawab pertanyaan umum seputar hal yang saya pelajari, alat
 yang saya pakai, dan arah karier saya.
@@ -108,4 +108,4 @@ nilai token saya tentukan sendiri berdasarkan foto profil. Saya
 memakai AI untuk: (1) memeriksa kontras WCAG pasangan warna token di
 kedua tema secara numerik, (2) menemukan bahwa teks tombol putih di
 atas --color-primary versi tema gelap gagal kontras AA, dan (3)
-menyarankan token --color-on-primary sebagai perbaikan. (4) membantu menemukan kesalahan dan bug 
+menyarankan token --color-on-primary sebagai perbaikan. (4) membantu menemukan kesalahan dan bug (5) membantu brainstroming dan membantu membetulkan error dan bug di browser agar web bisa menjadi tema gelap/terang
