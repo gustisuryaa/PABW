@@ -80,7 +80,7 @@ tombol, tautan, dan garis fokus utama.
 
 Kriteria selesai: mengubah --navy-700 di satu baris mengubah tombol,
 tautan, dan judul (catatan: judul saat ini memakai --color-fg, bukan
---color-primary — dipilih sengaja agar teks isi tetap netral dan tidak
+--color-primary dipilih sengaja agar teks isi tetap netral dan tidak
 terlalu ramai warna).
 
 ## Tujuan struktur tambahan
