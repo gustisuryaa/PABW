@@ -19,6 +19,23 @@ Semua praktikum dikerjakan tanpa framework dan tanpa proses build: HTML semantik
 | P05 | Layout modern: Flexbox dan Grid | [`worksheet-p5/`](worksheet-p5/) | Halaman yang sama dengan kerangka grid tiga baris, sidebar 16rem, galeri `auto-fit`, dan navbar flex. |
  
 Rincian tiap pertemuan ada di README masing-masing folder. README P04 ada di bawah.
+
+## Struktur repositori
+ 
+```text
+PABW/
+├── README.md            # berkas ini
+├── worksheet-p4/
+│   ├── profil.html
+│   ├── css/             # tokens, base, layout, komponen, tema
+│   ├── media/
+│   └── bukti/
+└── worksheet-p5/
+    ├── README.md
+    ├── profil.html
+    ├── css/             # tokens, base, layout, komponen, tema
+    └── media/
+```
  
  
 ## Cara menjalankan

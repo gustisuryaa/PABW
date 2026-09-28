@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!--
+  KERANGKA PROFIL — PABW 2026/2027 — Pertemuan 4
+  ==================================================================
+  Berkas ini SUDAH LENGKAP dan sudah lolos W3C Nu Html Checker serta
+  Lighthouse Accessibility. JANGAN mengubah struktur, landmark, label,
+  atau alt untuk memperbaiki tampilan — tampilan diubah dari berkas CSS.
+
+  Tugas Anda di Pertemuan 4:
+    1. Ganti isi yang ditandai  [ISI]  dengan milik Anda sendiri.
+    2. Buat lima berkas CSS di folder css/ lalu buka komentar
+       lima baris <link> di bawah  (lihat Lembar D).
+    3. WAJIB — tambahkan MINIMAL TIGA bagian baru di dalam <main>,
+       masing-masing memakai elemen semantik yang belum terpakai dan
+       berbeda satu sama lain  (lihat Lembar B.3). Setiap bagian wajib
+       diberi gaya memakai token yang sama, lalu dievaluasi W3C dan WCAG.
+-->
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <!-- ISI 1 — judul tab dan hasil pencarian. Ganti dengan nama Anda. -->
+  <title>Profil Gusti Surya Aditama — PABW 2026/2027</title>
+  <meta name="description" content="Halaman profil mahasiswa PABW: tentang saya, karya, dan kontak.">
+
+  <!-- LEMBAR D — buat lima berkas di folder css/, lalu buka komentar ini.
+       URUTAN PEMUATAN MENENTUKAN CASCADE: tokens, base, layout, komponen, tema.
+       Lapisan paling bawah menang tanpa perlu !important. -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/komponen.css">
+  <link rel="stylesheet" href="css/tema.css">
+</head>
+<body>
+  <a class="lewati" href="#utama">Lewati ke konten utama</a>
+
+  <header class="kepala">
+    <div class="header-teks">
+      <div class="tema-baris">
+        <input type="checkbox" id="tema" class="pengalih-tema">
+        <label for="tema" class="tombol-tema">Tema gelap</label>
+      </div>
+      <!-- ISI 2 — nama Anda, atau nama panggilan yang Anda pakai. -->
+      <h1>Gusti Surya Aditama</h1>
+      <!-- ISI 3 — satu kalimat tentang diri Anda. -->
+      <p class="tagline">Mahasiswa Informatika UII yang belajar UI/UX design dan frontend development.</p>
+    </div>
+    <nav aria-label="Navigasi utama">
+      <ul>
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#karya">Karya</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+        <li><a href="#lini-masa">Perjalanan</a></li>
+        <li><a href="#keterampilan">Keterampilan</a></li>
+        <li><a href="#tanya-jawab">Tanya jawab</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="utama">
+
+    <section id="tentang">
+      <h2>Tentang saya</h2>
+
+      <div class="profil-utama">
+      <figure class="foto">
+        <!-- ISI 4 — pakai foto Anda sendiri dengan nama berkas yang sama,
+             atau biarkan berkas contoh apa adanya. -->
+        <img src="media/foto-profil.jpeg"
+             alt="Ilustrasi grafik batang navy, putih, dan kuning keemasan sebagai foto profil sementara."
+             width="480" height="480" loading="lazy">
+      </figure>
+
+      <!-- ISI 5 — dua sampai tiga kalimat: asal, minat, dan hal yang
+           sedang Anda pelajari. -->
+      <p>Mahasiswa Informatika di Universitas Islam Indonesia (UII) dengan fokus pada Desain UI/UX dan Pengembangan Frontend. Saya menerjemahkan kebutuhan pengguna menjadi antarmuka yang intuitif serta mengembangkannya menggunakan Figma, React/Next.js, HTML/CSS, dan Python.
+        Saat ini, saya sedang memperluas keahlian ke pengembangan aplikasi berbasis AI. Saya merupakan anggota aktif Google Developer Group on Campus (GDGoC) UII dan memiliki pengalaman kepemimpinan dalam kepanitiaan acara serta organisasi siswa (MPK).
+        Saya bercita-cita meniti karier di bidang Pengembangan Perangkat Lunak dan Desain Produk dengan fokus pada solusi berbasis AI. Saya terbuka terhadap peluang di bidang teknologi, desain, maupun kolaborasi; jangan ragu untuk menghubungi saya.</p>
+      </div>
+      <table>
+        <!-- ISI 6 — judul tabel dan isi minimal tiga baris. -->
+        <caption>Kegiatan yang saya ikuti semester ini</caption>
+        <thead>
+          <tr>
+            <th scope="col">Kegiatan</th>
+            <th scope="col">Peran</th>
+            <th scope="col">Waktu</th>
+          </tr>
+        </thead> 
+        <tbody>
+          <tr>
+            <th scope="row">Jogja Information Technology Session UGM 2026</th>
+            <td>Peserta</td>
+            <td><time datetime="2026-09">September - Oktober 2026</time></td>
+          </tr>
+          <tr>
+            <th scope="row">GEMASTIK XIX 2026</th>
+            <td>Anggota tim</td>
+            <td><time datetime="2026">2026</time></td>
+          </tr>
+          <tr>
+            <th scope="row">DWDG UII 2026</th>
+            <td>Kandidat, tahap wawancara</td>
+            <td><time datetime="2026">2026</time></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- STRUKTUR TAMBAHAN (Lembar B.3) — tiga bagian baru di bawah ini,
+         masing-masing memakai elemen semantik berbeda dan id yang belum
+         terpakai. Ditaruh menyebar sesuai kolom "Taruh setelah" pada tabel
+         enam pilihan, bukan ditumpuk semua di akhir <main> — tiga section
+         asli di atas dan di bawahnya TIDAK diubah. -->
+
+    <section id="lini-masa">
+      <h2>Perjalanan saya</h2>
+      <ol class="lini">
+        <li><time datetime="2025-09">September 2025</time> mulai kuliah di Informatika UII.</li>
+        <li><time datetime="2025-10">Oktober 2025</time> mulai serius belajar UI/UX di Figma.</li>
+        <li><time datetime="2025-11">November 2025</time> Bergabung dan mengikuti GDGOoC UII sebagai member.</li>
+        <li><time datetime="2026-02">Februari 2026</time> Mengikuti lomba Apple Swift Student Challenge 2026.</li>
+        <li><time datetime="2026-08">Agustus 2026</time> Mengikuti GEMASTIK XIX 2026.</li>
+      </ol>
+    </section>
+
+    <section id="karya">
+      <h2>Karya saya</h2>
+      <!-- ISI 7 — tiga karya, proyek, atau hal yang pernah Anda buat.
+           Boleh tugas kuliah, karya pribadi, atau hobi. -->
+      <ul class="katalog">
+        <li class="kartu">
+          <figure class="kartu-foto">
+            <img src="media/karya-ecosort.jpg"
+                 alt="Tangkapan layar permainan EcoSort: menyortir gambar makanan ke tempat sampah organik atau daur ulang."
+                 width="1200" height="883" loading="lazy">
+            <figcaption>EcoSort — aplikasi game interaktif pengelolaan sampah, dibangun dengan SwiftUI untuk Apple Swift Student Challenge 2026.</figcaption>
+          </figure>
+        </li>
+        <li class="kartu">
+          <figure class="kartu-foto">
+            <img src="media/karya-narasi.jpg"
+                 alt="Tangkapan layar beranda NARASI, asisten dokumentasi klinis berbasis AI."
+                 width="1400" height="789" loading="lazy">
+            <figcaption>NARASI — aplikasi web dokumentasi klinis berbantuan AI, dibangun untuk GEMASTIK XIX 2026.</figcaption>
+          </figure>
+        </li>
+        <li class="kartu">
+          <figure class="kartu-foto">
+            <img src="media/karya-sqlquest.jpg" 
+                 alt="Tangkapan layar aplikasi SQLQuest." width="1200" height="883" loading="lazy">
+            <figcaption>SQLQuest — aplikasi SwiftUI yang mengajarkan JOIN SQL lewat permainan. (tahap pengembangan)</figcaption>
+          </figure>
+        </li>
+      </ul>
+    </section>
+
+    <section id="keterampilan">
+      <h2>Keterampilan</h2>
+      <dl class="keterampilan">
+        <dt>UI/UX Design</dt>
+        <dd>Figma wireframe, prototyping, dan design system sederhana.</dd>
+
+        <dt>Frontend Development</dt>
+        <dd>HTML semantik, CSS dengan design token, React dan Next.js serta Swift dengan Xcode</dd>
+
+        <dt>Lainnya</dt>
+        <dd>Python untuk kebutuhan data, dan mulai belajar workflow AI-assisted development.</dd>
+      </dl>
+    </section>
+
+    <section id="kontak">
+      <h2>Hubungi saya</h2>
+      <p>Isi formulir berikut. Semua kolom bertanda wajib harus diisi.</p>
+
+      <form action="#" method="post">
+        <fieldset>
+          <legend>Data pengirim</legend>
+
+          <p>
+            <label for="nama">Nama lengkap</label>
+            <input id="nama" name="nama" type="text"
+                   autocomplete="name" required>
+          </p>
+
+          <p>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email"
+                   autocomplete="email" required>
+          </p>
+
+          <p>
+            <label for="nim">NIM</label>
+            <!-- ISI 8 — ganti angka di dalam pattern dengan NIM Anda sendiri. -->
+            <input id="nim" name="nim" type="text" inputmode="numeric"
+                   pattern="[0-9]{8}" aria-describedby="nim-bantuan" required>
+            <span id="nim-bantuan">Delapan digit angka, contoh 25523053.</span>
+          </p>
+
+          <p>
+            <label for="pesan">Pesan</label>
+            <textarea id="pesan" name="pesan" rows="4" required></textarea>
+          </p>
+
+          <button type="submit">Kirim</button>
+        </fieldset>
+      </form>
+    </section>
+
+    <section id="tanya-jawab">
+      <h2>Tanya jawab</h2>
+
+      <details>
+        <summary>Apa yang sedang saya pelajari?</summary>
+        <p>CSS fundamental dan cara menyusun tampilan yang konsisten lewat design token dua lapis.</p>
+      </details>
+
+      <details>
+        <summary>Alat apa yang saya pakai sehari-hari?</summary>
+        <p>Figma untuk desain, VS Code dan Chrome DevTools untuk kode — F12 selalu terbuka saat menata tampilan.</p>
+      </details>
+
+      <details>
+        <summary>Apa arah karier yang sedang saya rintis?</summary>
+        <p>UI/UX design yang bersambung ke frontend development, dengan ketertarikan pada perkakas berbantuan AI.</p>
+      </details>
+    </section>
+
+  </main>
+
+  <footer class="kaki">
+    <!-- ISI 9 — nama, NIM, tahun. -->
+    <p>Gusti Surya Aditama · 25523053 · <time datetime="2026">2026</time></p>
+  </footer>
+</body>
+</html>
