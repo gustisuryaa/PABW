@@ -1,5 +1,5 @@
 # PABW — Pengembangan Aplikasi Berbasis Web 
-# Praktikum P05 — Layout Modern: Flexbox dan Grid
+# Praktikum P05 Layout Modern: Flexbox dan Grid
  
 Repositori tugas dan praktikum mata kuliah **Pengembangan Aplikasi Berbasis Web (SIF302)**, Semester Gasal 2026/2027.
  
@@ -49,7 +49,7 @@ Tidak perlu instalasi. Buka `profil.html` di folder pertemuan yang diinginkan la
 - Flexbox untuk baris dan isi komponen, grid untuk kerangka halaman dan galeri (mulai P05)
 - Validasi dengan W3C Nu Html Checker dan Lighthouse Accessibility
 
-# Praktikum P04 — Design Token untuk Halaman Profil Saya
+# Praktikum P04 Design Token untuk Halaman Profil Saya
 
 Starter: `kerangka-profil.html`. Berkas ini sudah lengkap dan sudah lolos
 W3C Nu Html Checker serta Lighthouse Accessibility. Jangan mengubah
