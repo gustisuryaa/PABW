@@ -11,16 +11,18 @@ table {
 caption {
   text-align: left;
   font-weight: 600;
-  margin-bottom: var(--space-2);
+  padding-block-end: var(--space-2);
 }
 th, td {
   text-align: left;
+  overflow-wrap: anywhere;   /* tabel tidak boleh lebih lebar dari kolomnya di 360 px */
   padding: var(--space-2) var(--space-3);
   border-bottom: 1px solid var(--color-border);
 }
 
 /* ---- Form ---- */
 form fieldset {
+  min-width: 0; /* bawaan peramban min-content: fieldset melebar melewati kolom sempit */
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-4);
@@ -56,6 +58,13 @@ input, textarea {
   color: var(--color-fg);
 }
 
+/* Hanya kolom isian di dalam form. Kalau dipasang ke semua input, kotak
+   centang tema yang tersembunyi ikut melebar 100% dan memicu scroll samping. */
+form input, form textarea {
+  width: 100%;
+  min-width: 0; /* lebar bawaan input (size=20) tidak boleh melebihi kolom */
+}
+
 #nim-bantuan {
   font-size: var(--text-sm);
   color: var(--color-fg);
@@ -88,7 +97,9 @@ input:user-invalid {
 .kartu-foto {
   display: flex;
   flex-direction: column;
+  flex: 1;                   /* isi mengisi tinggi kartu */
   gap: var(--space-2);
+  min-width: 0;              /* izinkan menyusut (kasus E.2) */
 }
 .kartu-foto img {
   width: 100%;
@@ -97,6 +108,7 @@ input:user-invalid {
   border-radius: var(--radius-md);
 }
 .kartu-foto figcaption {
+  overflow-wrap: anywhere;   /* teks panjang membungkus, tidak mendorong kolom */
   font-size: var(--text-sm);
   color: var(--color-fg);
 }
@@ -130,7 +142,7 @@ input:user-invalid {
   font-weight: 700;
 }
 .keterampilan dd {
-  margin-inline-start: var(--space-4);
+  padding-inline-start: var(--space-4);
   color: var(--color-fg);
 }
 
@@ -140,9 +152,6 @@ input:user-invalid {
   border-radius: var(--radius-md);
   padding: var(--space-3) var(--space-4);
   background: var(--color-surface);
-}
-#tanya-jawab details + details {
-  margin-top: var(--space-2);
 }
 #tanya-jawab summary {
   cursor: pointer;
