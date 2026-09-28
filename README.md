@@ -1,4 +1,4 @@
-# PABW — Pengembangan Aplikasi Berbasis Web 
+# PABW Pengembangan Aplikasi Berbasis Web 
 # Praktikum P05 Layout Modern: Flexbox dan Grid
  
 Repositori tugas dan praktikum mata kuliah **Pengembangan Aplikasi Berbasis Web (SIF302)**, Semester Gasal 2026/2027.
@@ -20,22 +20,6 @@ Semua praktikum dikerjakan tanpa framework dan tanpa proses build: HTML semantik
  
 Rincian tiap pertemuan ada di README masing-masing folder. README P04 ada di bawah.
  
-## Struktur repositori
- 
-```text
-PABW/
-├── README.md            # berkas ini
-├── worksheet-p4/
-│   ├── profil.html
-│   ├── css/             # tokens, base, layout, komponen, tema
-│   ├── media/
-│   └── bukti/
-└── worksheet-p5/
-    ├── README.md
-    ├── profil.html
-    ├── css/             # tokens, base, layout, komponen, tema
-    └── media/
-```
  
 ## Cara menjalankan
  
