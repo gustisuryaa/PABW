@@ -1,3 +1,54 @@
+# PABW — Pengembangan Aplikasi Berbasis Web 
+# Praktikum P04 — Design Token untuk Halaman Profil Saya
+ 
+Repositori tugas dan praktikum mata kuliah **Pengembangan Aplikasi Berbasis Web (SIF302)**, Semester Gasal 2026/2027.
+ 
+| | |
+|---|---|
+| Nama | Gusti Surya Aditama |
+| NIM | 25523053 |
+| Program studi | Informatika, Universitas Islam Indonesia |
+ 
+Semua praktikum dikerjakan tanpa framework dan tanpa proses build: HTML semantik dan CSS murni. Setiap pertemuan melanjutkan halaman profil yang sama, jadi isi halamannya tetap dan yang berkembang adalah cara menyusun tampilannya.
+ 
+## Daftar praktikum
+ 
+| Pertemuan | Topik | Folder | Ringkasan |
+|---|---|---|---|
+| P04 | Design token | [`worksheet-p4/`](worksheet-p4/) | Halaman profil dengan token dua lapis (primitif dan semantik), tema terang dan gelap, serta tiga struktur semantik tambahan. |
+| P05 | Layout modern: Flexbox dan Grid | [`worksheet-p5/`](worksheet-p5/) | Halaman yang sama dengan kerangka grid tiga baris, sidebar 16rem, galeri `auto-fit`, dan navbar flex. |
+ 
+Rincian tiap pertemuan ada di README masing-masing folder. README P04 ada di bawah.
+ 
+## Struktur repositori
+ 
+```text
+PABW/
+├── README.md            # berkas ini
+├── worksheet-p4/
+│   ├── profil.html
+│   ├── css/             # tokens, base, layout, komponen, tema
+│   ├── media/
+│   └── bukti/
+└── worksheet-p5/
+    ├── README.md
+    ├── profil.html
+    ├── css/             # tokens, base, layout, komponen, tema
+    └── media/
+```
+ 
+## Cara menjalankan
+ 
+Tidak perlu instalasi. Buka `profil.html` di folder pertemuan yang diinginkan langsung di peramban, atau lewat ekstensi **Live Server** di VS Code supaya halaman ikut muat ulang saat berkas berubah.
+ 
+## Yang dipakai
+ 
+- HTML semantik: landmark, form dengan label, `<details>`, `<dl>`, `<ol>` dengan `<time>`
+- CSS dengan lima berkas berurutan: `tokens.css`, `base.css`, `layout.css`, `komponen.css`, `tema.css`
+- Design token dua lapis, dengan tema gelap lewat `prefers-color-scheme` dan tombol pengalih manual
+- Flexbox untuk baris dan isi komponen, grid untuk kerangka halaman dan galeri (mulai P05)
+- Validasi dengan W3C Nu Html Checker dan Lighthouse Accessibility
+
 # Praktikum P04 — Design Token untuk Halaman Profil Saya
 
 Starter: `kerangka-profil.html`. Berkas ini sudah lengkap dan sudah lolos
