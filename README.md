@@ -1,5 +1,5 @@
 # PABW — Pengembangan Aplikasi Berbasis Web 
-# Praktikum P04 — Design Token untuk Halaman Profil Saya
+# Praktikum P05 — Layout Modern: Flexbox dan Grid
  
 Repositori tugas dan praktikum mata kuliah **Pengembangan Aplikasi Berbasis Web (SIF302)**, Semester Gasal 2026/2027.
  
