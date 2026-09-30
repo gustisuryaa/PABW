@@ -35,6 +35,10 @@ main > * {
 .table-wrap {
   overflow-x: auto;
 }
+/* Tabel tidak menyusut di bawah lebar ini; sisanya bergulir di wadah */
+.table-wrap table {
+  min-width: 32rem;
+}
 
 /* ---- TITIK HENTI 1 (48rem = 768 px): galeri jadi dua kolom ---- */
 @media (min-width: 48rem) {
