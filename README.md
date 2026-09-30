@@ -1,4 +1,45 @@
 # PABW Pengembangan Aplikasi Berbasis Web 
+# Praktikum P06 Responsif Mobile-First
+
+Lanjutan P05. Isi halaman tidak berubah. Yang ditambah: satu berkas `css/responsif.css`,
+satu baris `<link>`, dan satu pembungkus `<div class="table-wrap">` di sekitar tabel.
+
+## Lembar A: viewport dan lebar tetap
+
+Baris `<meta name="viewport" content="width=device-width, initial-scale=1">` sudah ada di `<head>`.
+
+| Berkas dan pemilih | Lebar sekarang | Ganti dengan |
+|---|---|---|
+| layout.css `.sidebar` | tidak ada di kode saya. Kolom samping ditulis `16rem` di grid `main` | dipertahankan `16rem`, hanya aktif mulai 60rem |
+| komponen.css `.kartu` | tidak ada `width: 320px`. Lebar kartu ditentukan kolom grid | `1fr` per kolom |
+| base.css `img` | tidak ada `width: 900px` | `max-width: 100%; height: auto` (sudah ada) |
+
+## Lembar B dan C: gaya dasar dan titik henti
+
+Pemetaan nama kelas worksheet ke halaman saya: `.content` = `<main>`, `.grid` = `.katalog`.
+
+| Titik henti | Yang berubah | Kenapa di lebar itu |
+|---|---|---|
+| 48rem (768 px) | galeri dari 1 kolom menjadi 2 kolom | Di 768 px lebar kartu 360 px: foto dan keterangan masih terbaca. Di bawahnya kartu jadi kurang dari 300 px |
+| 60rem (960 px) | sidebar 16rem bersanding dengan konten, galeri 3 kolom | Di bawah 960 px, sidebar 16rem menyisakan kolom konten yang terlalu sempit untuk paragraf dan tabel |
+
+## Lembar D: media dan teks
+
+- `img { max-width: 100%; height: auto }` di base.css.
+- `.table-wrap { overflow-x: auto }` di responsif.css. Wadah diberi `role="region"`, `aria-label`, dan `tabindex="0"` supaya area gulirnya bisa dijangkau papan ketik.
+- Ukuran teks memakai `rem`.
+
+## Lembar E: hasil uji DevTools
+
+| Lebar | Jumlah kolom | Catatan |
+|---|---|---|
+| 360 px | 1 | Tidak ada gulir mendatar. Semua bagian satu kolom sesuai urutan HTML |
+| 768 px | 2 | Galeri 2 kolom, kartu ketiga sendirian di baris kedua. Sidebar belum muncul |
+| 1 280 px | 3 (+ sidebar) | Kolom samping 256 px, konten 968 px, kartu 312 px |
+
+Tangkapan layar: `bukti/bukti-360px.png`, `bukti-768px.png`, `bukti-1280px.png`.
+
+
 # Praktikum P05 Layout Modern: Flexbox dan Grid
  
 Repositori tugas dan praktikum mata kuliah **Pengembangan Aplikasi Berbasis Web (SIF302)**, Semester Gasal 2026/2027.
