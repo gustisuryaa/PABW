@@ -1,0 +1,65 @@
+/* ==================================================================
+   RESPONSIF.CSS — Pertemuan 6: mobile-first.
+   Urutan berkas: gaya dasar (layar sempit, tanpa media query) di atas,
+   lalu tambahan dengan min-width + rem di bawah. Jangan pakai max-width.
+
+   Pemetaan ke worksheet: .content = <main>, .grid = .katalog (galeri
+   "Karya saya"). HTML tidak diberi kelas baru supaya struktur P4/P5
+   tetap sama.
+   ================================================================== */
+
+/* ---- DASAR: berlaku di semua lebar (satu kolom) ---- */
+main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--section-gap);
+  align-content: start;
+}
+
+/* Item grid tidak menyusut di bawah ukuran isinya secara bawaan.
+   min-width: 0 memberi izin menyusut, jadi teks panjang membungkus
+   dan tidak melebarkan kolom. */
+main > * {
+  min-width: 0;
+}
+
+.katalog {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  list-style: none;
+  padding: 0;
+}
+
+/* Tabel lebar bergulir di dalam wadahnya sendiri, bukan menggeser halaman */
+.table-wrap {
+  overflow-x: auto;
+}
+
+/* ---- TITIK HENTI 1 (48rem = 768 px): galeri jadi dua kolom ---- */
+@media (min-width: 48rem) {
+  .katalog { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---- TITIK HENTI 2 (60rem = 960 px): sidebar bersanding dengan konten ----
+   Area bernama: memindah satu blok cukup dengan mengubah teks di
+   grid-template-areas, tanpa menghitung nomor garis. */
+@media (min-width: 60rem) {
+  main {
+    grid-template-columns: 16rem 1fr;
+    grid-template-areas:
+      "lini    tentang"
+      "skill   karya"
+      "kontak  tanya";
+    align-items: start;   /* tiap blok setinggi isinya sendiri */
+  }
+
+  #lini-masa    { grid-area: lini; }
+  #tentang      { grid-area: tentang; }
+  #keterampilan { grid-area: skill; }
+  #karya        { grid-area: karya; }
+  #kontak       { grid-area: kontak; }
+  #tanya-jawab  { grid-area: tanya; }
+
+  .katalog { grid-template-columns: repeat(3, 1fr); }
+}
