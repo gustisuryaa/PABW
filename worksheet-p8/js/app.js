@@ -91,3 +91,4 @@ console.assert(urutJudulTerbalik[0].judul === "SQLQuest", "urutan judul tidak se
 console.assert(daftarProyek[0].judul === "EcoSort", "urutan asli daftarProyek berubah");
 console.assert(profil.nama === "Gusti Surya Aditama", "mengubah salinan ikut mengubah profil");
 console.assert(buatPerkenalan(profil) === buatPerkenalan(profil), "fungsi tidak murni");
+
