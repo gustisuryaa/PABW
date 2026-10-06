@@ -22,6 +22,10 @@ const buatPerkenalan = ({ nama, peran }) => `${nama}, ${peran}.`;
 // merapikan daftar keahlian menjadi satu baris teks
 const formatKeahlian = (daftar) => daftar.join(" · ");
 
+// mengubah satu proyek menjadi satu baris teks
+const formatProyek = ({ judul, tahun, selesai }) =>
+  `${judul} (${tahun}) - ${selesai ? "selesai" : "tahap pengembangan"}`;
+
 // menyaring proyek menurut pilihan ("semua" atau "selesai")
 const saringProyek = (daftar, pilihan = "semua") => {
   if (pilihan === "selesai") {
@@ -42,6 +46,19 @@ const elemenNama = document.querySelector(".kepala h1");
 const elemenTagline = document.querySelector(".kepala .tagline");
 if (elemenNama) elemenNama.textContent = profil.nama;
 if (elemenTagline) elemenTagline.textContent = `${profil.peran}.`;
+
+// Daftar keahlian dan proyek tampil di halaman, dibangun dari data (bukan ditulis di HTML)
+const elemenKeahlian = document.querySelector("#daftar-keahlian");
+const elemenProyek = document.querySelector("#daftar-proyek");
+if (elemenKeahlian) elemenKeahlian.textContent = formatKeahlian(profil.keahlian);
+if (elemenProyek) {
+  const itemProyek = saringProyek(daftarProyek, pilihanFilter).map((proyek) => {
+    const item = document.createElement("li");
+    item.textContent = formatProyek(proyek);
+    return item;
+  });
+  elemenProyek.replaceChildren(...itemProyek);
+}
 
 //cek konsol Bagian C dan D
 console.log(buatPerkenalan(profil));
@@ -91,4 +108,3 @@ console.assert(urutJudulTerbalik[0].judul === "SQLQuest", "urutan judul tidak se
 console.assert(daftarProyek[0].judul === "EcoSort", "urutan asli daftarProyek berubah");
 console.assert(profil.nama === "Gusti Surya Aditama", "mengubah salinan ikut mengubah profil");
 console.assert(buatPerkenalan(profil) === buatPerkenalan(profil), "fungsi tidak murni");
-
