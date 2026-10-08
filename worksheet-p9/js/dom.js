@@ -73,7 +73,7 @@ barisFilter.addEventListener("click", (event) => {
   tandaiTombolAktif(tombol);
 });
 
-// Keadaan awal: semua proyek tampil, tombol "semua" aktif
+
 renderProyek(daftarProyek);
 tandaiTombolAktif(barisFilter.querySelector('[data-kategori="semua"]'));
 
