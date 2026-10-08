@@ -146,7 +146,7 @@ Tangkapan layar:
 
 ## Deklarasi penggunaan AI
 
-> **Periksa dan sesuaikan bagian ini sebelum dikumpulkan.** Isi hanya yang benar-benar terjadi.
+saya menggunakan AI untuk membantu memandu saya dalam step by step pengerjaan dan menjelaskan isi dom.js nya terutama di bagian cara mencari dan membetulkan galat nya
 
 **Saya kerjakan sendiri:**
 
