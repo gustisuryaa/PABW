@@ -1,5 +1,7 @@
-import { profil, formatKeahlian } from "./app.js";
-//bagian A
+import { profil, daftarProyek, formatKeahlian, saringKategori } from "./app.js";
+
+
+// Lembar A: cari elemen dulu, simpan di variabel (tabel A.3)
 const elemenNama = document.querySelector(".kepala h1");
 const elemenTagline = document.querySelector(".kepala .tagline");
 const elemenKeahlian = document.querySelector("#daftar-keahlian");
@@ -17,7 +19,10 @@ elemenNama.textContent = profil.nama;
 elemenTagline.textContent = `${profil.peran}.`;
 elemenKeahlian.textContent = formatKeahlian(profil.keahlian);
 
-//bagian B dan D.1: render daftar proyek dari data
+
+// Lembar B dan D.1: render daftar proyek dari data
+
+
 function buatKartu(proyek) {
   const kartu = document.createElement("li");
   kartu.className = "kartu-proyek";
@@ -50,18 +55,19 @@ function renderProyek(daftar) {
 
 
 // Lembar C: satu pendengar di induk untuk semua tombol filter
+
 function tandaiTombolAktif(tombolAktif) {
   barisFilter.querySelectorAll("button").forEach((tombol) => {
     const aktif = tombol === tombolAktif;
-    tombol.classList.toggle("aktif", aktif);          // tampilan: aturan .aktif di CSS
-    tombol.setAttribute("aria-pressed", String(aktif)); // pembaca layar: tombol mana yang menyala
+    tombol.classList.toggle("aktif", aktif);          
+    tombol.setAttribute("aria-pressed", String(aktif)); 
   });
 }
 
-
+// Dipasang SEKALI, di luar renderProyek, pada induknya (#filter).
 barisFilter.addEventListener("click", (event) => {
-  const tombol = event.target.closest("button"); 
-  if (!tombol) return;                         
+  const tombol = event.target.closest("button"); // klik bisa jatuh di anak tombol
+  if (!tombol) return;                           // klik di sela tombol: abaikan
 
   renderProyek(saringKategori(daftarProyek, tombol.dataset.kategori));
   tandaiTombolAktif(tombol);
@@ -72,7 +78,8 @@ renderProyek(daftarProyek);
 tandaiTombolAktif(barisFilter.querySelector('[data-kategori="semua"]'));
 
 
-//bagian D.2: validasi form (aturan disimpan sebagai data)
+// Lembar D.2: validasi form (aturan disimpan sebagai data)
+
 const aturanKolom = {
   nama:  { sah: (isi) => isi.length >= 2,
            pesan: "Nama belum diisi. Tulis nama lengkap Anda, minimal 2 huruf." },
@@ -97,14 +104,16 @@ function tampilkanStatusKolom(kolom) {
   if (sah) {
     kolom.removeAttribute("aria-invalid");
   } else {
-    kolom.setAttribute("aria-invalid", "true"); // penanda pembaca layar (dan CSS)
+    kolom.setAttribute("aria-invalid", "true"); 
   }
   return sah;
 }
 
 const semuaKolomSah = () => Array.from(kolomFormulir).every(kolomSah);
 
+
 formulir.noValidate = true;
+
 
 formulir.addEventListener("input", (event) => {
   const kolom = event.target.closest("input, textarea");
@@ -114,6 +123,7 @@ formulir.addEventListener("input", (event) => {
   tombolKirim.disabled = !semuaKolomSah();
   statusKirim.hidden = true; 
 });
+
 
 formulir.addEventListener("focusout", (event) => {
   const kolom = event.target.closest("input, textarea");
@@ -136,3 +146,4 @@ formulir.addEventListener("submit", (event) => {
   statusKirim.textContent = `Terima kasih, ${namaPengirim}. Pesan Anda sudah dicatat (simulasi: belum ada server yang menerimanya).`;
   statusKirim.hidden = false;
 });
+

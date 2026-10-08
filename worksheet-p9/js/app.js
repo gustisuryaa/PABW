@@ -1,3 +1,5 @@
+// app.js: data dan fungsi murni. Tidak menyentuh halaman (itu tugas dom.js).
+
 // Bagian B: data sebagai variabel
 export const profil = {
   nama: "Gusti Surya Aditama",
@@ -34,3 +36,7 @@ export const saringProyek = (daftar, pilihan = "semua") => {
   }
   return daftar;
 };
+
+// P9: menyaring proyek menurut kategori ("semua" mengembalikan seluruh daftar)
+export const saringKategori = (daftar, kategori) =>
+  daftar.filter((proyek) => kategori === "semua" || proyek.kategori === kategori);

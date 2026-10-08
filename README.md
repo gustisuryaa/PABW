@@ -11,6 +11,54 @@ Repositori tugas dan praktikum mata kuliah **Pengembangan Aplikasi Berbasis Web 
 
 Setiap pertemuan melanjutkan halaman profil yang sama. P04 sampai P06 memakai HTML semantik dan CSS murni tanpa framework dan tanpa proses build. Mulai P08 ditambah JavaScript modern (ES6+) tanpa pustaka.
 
+Setiap pertemuan melanjutkan halaman profil yang sama. P04 sampai P06 memakai HTML semantik dan CSS murni tanpa framework dan tanpa proses build. Mulai P08 ditambah JavaScript modern (ES6+) tanpa pustaka. P09 menghubungkan data JavaScript ke halaman (DOM, event, validasi form).
+
+## Daftar praktikum
+
+| Pertemuan | Topik | Folder | Ringkasan |
+|---|---|---|---|
+| P04 | Design token | [`worksheet-p4/`](worksheet-p4/) | Token dua lapis (primitif dan semantik), tema terang dan gelap, tiga struktur semantik tambahan. |
+| P05 | Layout modern: Flexbox dan Grid | [`worksheet-p5/`](worksheet-p5/) | Kerangka grid tiga baris, sidebar 16rem, galeri `auto-fit`, navbar flex. |
+| P06 | Responsif mobile-first | [`worksheet-p6/`](worksheet-p6/) | `responsif.css`, titik henti 48rem dan 60rem, tabel yang bisa digulir. |
+| P08 | JavaScript modern ES6+, struktur data, array methods | [`worksheet-p8/`](worksheet-p8/) | Data halaman menjadi variabel, objek, dan array; tiga fungsi murni; `map`, `filter`, `find`. |
+| P09 | DOM, event, dan interaktivitas | [`worksheet-p9/`](worksheet-p9/) | Daftar proyek dirender dari data, filter kategori dengan satu pendengar di induk, validasi form per kolom. |
+
+## Struktur repositori
+
+```text
+PABW_25523053/
+├── README.md            # berkas ini
+├── worksheet-p4/        # profil.html, css/, media/, bukti/
+├── worksheet-p5/        # profil.html, css/, media/, bukti/
+├── worksheet-p6/        # profil.html, css/ (+ responsif.css), media/, bukti/
+├── worksheet-p8/
+│   ├── profil.html
+│   ├── css/             # tokens, base, layout, komponen, tema, responsif
+│   ├── js/app.js        # data dan fungsi (modul ES)
+│   ├── media/
+│   └── bukti/           # tangkapan layar Console (lembar E)
+└── worksheet-p9/
+    ├── profil.html
+    ├── css/             # sama seperti P8; komponen.css ditambah filter, kartu proyek, galat form
+    ├── js/app.js        # data dan fungsi murni (export)
+    ├── js/dom.js        # satu-satunya berkas yang menyentuh halaman
+    ├── media/
+    ├── bukti/           # tangkapan layar hasil (daftar, filter, form)
+    └── lembar-jawaban.md  # tabel A sampai F
+```
+
+## Cara menjalankan
+
+- **P04 sampai P06:** buka `profil.html` langsung di peramban, atau lewat **Live Server** di VS Code.
+- **P08 dan P09:** wajib lewat server lokal karena memakai `<script type="module">`. Buka folder `worksheet-p8/` (atau `worksheet-p9/`) di VS Code, klik kanan `profil.html`, pilih **Open with Live Server**. Alamat harus berawalan `http://`, bukan `file://`. Alternatif: `python3 -m http.server 8000` dari dalam folder worksheet yang dibuka, lalu buka `http://localhost:8000/profil.html`.
+
+---
+
+# Praktikum P09: DOM, Event, dan Interaktivitas
+
+Halaman profil dari P08 disalin ke `worksheet-p9/`. Data yang di P08 hanya terlihat di Console kini dipasang ke halaman, dan halaman menanggapi pengguna tanpa dimuat ulang. Lembar jawaban A sampai F ada di [`worksheet-p9/lembar-jawaban.md`](worksheet-p9/lembar-jawaban.md).
+
+
 ## Daftar praktikum
 
 | Pertemuan | Topik | Folder | Ringkasan |
