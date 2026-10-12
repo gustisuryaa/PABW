@@ -47,6 +47,63 @@ PABW_25523053/
     └── lembar-jawaban.md  # tabel A sampai F
 ```
 
+# Worksheet P10: JavaScript Asinkron (fetch, Promise, JSON)
+
+Pengembangan Aplikasi Berbasis Web (SIF302), Semester Gasal 2026/2027
+Nama: Gusti Surya Aditama, NIM 25523053, Kelas E
+
+## Isi
+
+Lanjutan `profil.html` dari Pertemuan 9. Satu bagian baru ("Contoh data dari API") mengambil daftar tugas dari API publik lewat `fetch`, lalu menampilkannya dengan empat keadaan: memuat, berhasil, gagal, kosong.
+
+| Berkas | Peran |
+| --- | --- |
+| `js/api.js` (baru) | Satu-satunya tempat `fetch`. Alamat API, pemeriksaan `respons.ok`, `json()`, satu `try/catch`. Mengekspor `ambilTugas()`. |
+| `js/dom.js` | Pemanggil: `try/catch` kedua, empat keadaan antarmuka, render kartu. |
+| `js/app.js` | Tidak diubah (data dan fungsi murni). |
+| `profil.html`, `css/komponen.css` | Menambah `<section id="data-api">` dan gaya pesan status. |
+
+Catatan: `app.js` di proyek ini sengaja tidak menyentuh halaman (itu tugas `dom.js`), jadi pemanggil `api.js` saya taruh di `dom.js`, bukan di `app.js`.
+
+## API
+
+- Alamat: `https://dummyjson.com/todos?limit=6` (publik, tanpa kunci akses).
+- Alamat hanya ditulis di `js/api.js`, konstanta `ALAMAT`.
+- Bentuk balasan: `{ todos: [{ id, todo, completed, userId }], total, skip, limit }`.
+- Bila API tidak terjangkau dari jaringan kelas, pilihan cadangan: berkas `notisia.json` lokal (belum dipakai).
+
+## Cara menjalankan
+
+Modul ES tidak bisa dibuka lewat `file://`. Jalankan server lokal dari folder ini:
+
+```bash
+python3 -m http.server 8000
+```
+
+Lalu buka `http://localhost:8000/profil.html`.
+
+## Penanganan galat
+
+| Kegagalan | Pesan di halaman |
+| --- | --- |
+| Jaringan mati atau alamat tidak ada | Gagal memuat data: jaringan tidak terjangkau |
+| Status 404 atau 500 | Gagal memuat data: server membalas status 404 |
+| Badan bukan JSON | Gagal memuat data: balasan bukan JSON |
+| Balasan sah, bentuk tidak sesuai | Gagal memuat data: bentuk data tidak dikenali |
+| Balasan sah, larik kosong | Belum ada tugas. |
+
+## Bukti
+
+Tangkapan layar empat keadaan ada di folder `bukti/`: `p10-memuat.png`, `p10-berhasil.png`, `p10-gagal.png`, `p10-kosong.png`.
+
+## Pengungkapan penggunaan AI
+
+- Dibantu AI (Claude, Anthropic): rancangan awal `js/api.js`, blok P10 di akhir `js/dom.js`, section HTML dan CSS tambahan, serta draf jawaban lembar.
+- Saya kerjakan sendiri: menjalankan dan mengamati pengujian empat keadaan di peramban, mengambil tangkapan layar, memeriksa panel Network dan Console, serta menyunting dan memahami setiap baris kode di atas.
+- Topik dan isi halaman ini milik saya sendiri tidak menyalin pekerjaan mahasiswa lain
+
+
+
 ## Cara menjalankan
 
 - **P04 sampai P06:** buka `profil.html` langsung di peramban, atau lewat **Live Server** di VS Code.
