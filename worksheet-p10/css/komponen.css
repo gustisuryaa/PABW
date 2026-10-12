@@ -238,9 +238,7 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* ==================================================================
-   Pertemuan 10: pesan status data dari jaringan
-   ================================================================== */
+/* Pertemuan 10: pesan status data dari jaringan */
 #status-tugas {
   padding: var(--space-3) var(--space-4);
   border: 1px solid var(--color-border);

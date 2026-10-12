@@ -1,5 +1,5 @@
 import { profil, daftarProyek, formatKeahlian, saringKategori } from "./app.js";
-import "./api.js";
+import { ambilTugas } from "./api.js";
 
 // Lembar A: cari elemen dulu, simpan di variabel (tabel A.3)
 const elemenNama = document.querySelector(".kepala h1");
@@ -147,3 +147,17 @@ formulir.addEventListener("submit", (event) => {
   statusKirim.hidden = false;
 });
 
+// P10 Lembar B: panggil api.js, tampilkan hasil atau galatnya di halaman
+
+const statusTugas = document.querySelector("#status-tugas");
+
+async function tampilkanTugas() {
+  try {
+    await ambilTugas();
+    statusTugas.textContent = "Data berhasil dimuat.";
+  } catch (galat) {
+    statusTugas.textContent = "Gagal memuat data: " + galat.message;
+  }
+}
+
+tampilkanTugas();
