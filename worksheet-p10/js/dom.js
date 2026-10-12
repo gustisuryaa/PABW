@@ -147,14 +147,41 @@ formulir.addEventListener("submit", (event) => {
   statusKirim.hidden = false;
 });
 
-// P10 Lembar B: panggil api.js, tampilkan hasil atau galatnya di halaman
+// P10 Lembar D: data dari jaringan (fetch hanya ada di api.js)
 
+const wadahTugas = document.querySelector("#daftar-tugas");
 const statusTugas = document.querySelector("#status-tugas");
 
+// hanya menyusun elemen; isi dari jaringan dipasang dengan textContent, bukan innerHTML
+function gambarTugas(daftar) {
+  wadahTugas.textContent = ""; // kosongkan dulu supaya kartu tidak berlipat
+  daftar.forEach((tugas) => {
+    const kartu = document.createElement("li");
+    kartu.className = "kartu-proyek";
+
+    const judul = document.createElement("strong");
+    judul.textContent = tugas.todo;
+
+    const keterangan = document.createElement("span");
+    keterangan.textContent = tugas.completed ? "selesai" : "belum selesai";
+
+    kartu.append(judul, keterangan);
+    wadahTugas.append(kartu);
+  });
+}
+
+// try/catch kedua: menangani penolakan dari api.js dan menampilkannya di halaman
 async function tampilkanTugas() {
+  wadahTugas.textContent = "";
+  statusTugas.textContent = "Memuat tugas...";
   try {
-    await ambilTugas();
-    statusTugas.textContent = "Data berhasil dimuat.";
+    const daftar = await ambilTugas();
+    if (daftar.length === 0) {
+      statusTugas.textContent = "Belum ada tugas.";
+      return;
+    }
+    statusTugas.textContent = "";
+    gambarTugas(daftar);
   } catch (galat) {
     statusTugas.textContent = "Gagal memuat data: " + galat.message;
   }
