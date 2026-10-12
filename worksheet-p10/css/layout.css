@@ -1,0 +1,110 @@
+/* ==================================================================
+   LAYOUT.CSS — Pertemuan 5: kerangka halaman dengan GRID,
+   baris dan isi komponen dengan FLEX. Jarak hanya lewat gap.
+   Pertemuan 6: grid area isi (main) dan galeri (.katalog) dipindah
+   ke responsif.css, karena susunannya kini bergantung pada lebar layar.
+   ================================================================== */
+
+/* ---- Kerangka halaman: tiga baris (kepala / isi / kaki) ----
+   <body> sendiri menjadi .page supaya HTML tidak perlu diubah.
+   Satu kolom selebar maksimal 80rem, dipusatkan lewat justify-content
+   (tanpa tempelan jarak). Baris tengah 1fr mengisi sisa tinggi, jadi
+   footer selalu menempel di bawah walau isi pendek. */
+body {
+  display: grid;
+  grid-template-columns: minmax(0, 80rem);
+  grid-template-rows: auto 1fr auto;
+  justify-content: center;
+  row-gap: var(--section-gap);
+  min-height: 100vh;    /* cadangan untuk peramban lama */
+  min-height: 100dvh;   /* dvh: ikut bilah alamat ponsel yang bergerak */
+  padding: var(--space-4);
+}
+
+/* ---- Navbar: header dan daftar menu memakai flex ---- */
+.kepala {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;             /* turun baris di layar sempit, tidak meluber */
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-teks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);         /* jarak tombol tema ke judul */
+}
+
+.tema-baris {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.kepala .tagline {
+  color: var(--color-fg);
+  font-size: var(--text-sm);
+}
+
+.kepala nav ul {
+  display: flex;
+  gap: var(--space-4);
+  list-style: none;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.kepala nav a {
+  text-decoration: none;
+}
+.kepala nav a:hover {
+  text-decoration: underline;
+}
+
+/* ---- Isi satu bagian: flex kolom, jarak lewat gap ---- */
+main > section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Foto + paragraf di #tentang: flex baris yang boleh membungkus.
+   (main > section adalah flex container, jadi tata letak lama tidak berlaku.) */
+.profil-utama {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.profil-utama .foto {
+  flex: 0 0 auto;
+  width: 12rem;
+}
+.profil-utama p {
+  flex: 1 1 24rem;
+  max-width: none; /* lepas dari batas 60ch section umum */
+}
+
+/* ---- Kartu: kotak di grid, isinya flex kolom ---- */
+.kartu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-height: 14rem;           /* kartu pendek tidak tampak "terpotong" */
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-1);
+  padding: var(--card-pad);
+}
+
+/* ---- Footer ---- */
+.kaki {
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-fg);
+  font-size: var(--text-sm);
+}
