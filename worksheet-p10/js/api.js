@@ -8,11 +8,16 @@ const ALAMAT = "https://dummyjson.com/todos?limit=6";
 export async function ambilTugas() {
   try {
     const respons = await fetch(ALAMAT);
-    // fetch tidak melempar galat pada 404/500, jadi status diperiksa sendiri
     if (!respons.ok) throw new Error("server membalas status " + respons.status);
 
     const data = await respons.json();
-    return data;
+
+    // balasan sah tetapi bentuknya tidak sesuai harapan (bukan { todos: [...] })
+    if (!Array.isArray(data.todos)) throw new Error("bentuk data tidak dikenali");
+
+    return data.todos;
+
+    
   } catch (galat) {
     console.error("gagal memuat", galat.message);
     // pesan teknis peramban diganti kalimat yang bisa dibaca pengguna
