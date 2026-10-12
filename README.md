@@ -32,19 +32,17 @@ PABW_25523053/
 ├── worksheet-p5/        # profil.html, css/, media/, bukti/
 ├── worksheet-p6/        # profil.html, css/ (+ responsif.css), media/, bukti/
 ├── worksheet-p8/
-│   ├── profil.html
-│   ├── css/             # tokens, base, layout, komponen, tema, responsif
-│   ├── js/app.js        # data dan fungsi (modul ES)
-│   ├── media/
-│   └── bukti/           # tangkapan layar Console (lembar E)
 └── worksheet-p9/
+└── worksheet-p10/
     ├── profil.html
-    ├── css/             # sama seperti P8; komponen.css ditambah filter, kartu proyek, galat form
-    ├── js/app.js        # data dan fungsi murni (export)
-    ├── js/dom.js        # satu-satunya berkas yang menyentuh halaman
+    ├── css/             
+    ├── js/app.js        
+    ├── js/dom.js   
+    ├── js/api.js    
     ├── media/
-    ├── bukti/           # tangkapan layar hasil (daftar, filter, form)
-    └── lembar-jawaban.md  # tabel A sampai F
+    ├── bukti/          
+    └── lembar-jawaban.md 
+    
 ```
 
 # Worksheet P10: JavaScript Asinkron (fetch, Promise, JSON)
