@@ -1,50 +1,3 @@
-# PABW — Pengembangan Aplikasi Berbasis Web
-
-Repositori tugas dan praktikum mata kuliah **Pengembangan Aplikasi Berbasis Web (SIF302)**, Semester Gasal 2026/2027.
-
-| | |
-|---|---|
-| Nama | Gusti Surya Aditama |
-| NIM | 25523053 |
-| Kelas | E |
-| Program studi | Informatika, Universitas Islam Indonesia |
-
-Setiap pertemuan melanjutkan halaman profil yang sama. P04 sampai P06 memakai HTML semantik dan CSS murni tanpa framework dan tanpa proses build. Mulai P08 ditambah JavaScript modern (ES6+) tanpa pustaka.
-
-Setiap pertemuan melanjutkan halaman profil yang sama. P04 sampai P06 memakai HTML semantik dan CSS murni tanpa framework dan tanpa proses build. Mulai P08 ditambah JavaScript modern (ES6+) tanpa pustaka. P09 menghubungkan data JavaScript ke halaman (DOM, event, validasi form).
-
-## Daftar praktikum
-
-| Pertemuan | Topik | Folder | Ringkasan |
-|---|---|---|---|
-| P04 | Design token | [`worksheet-p4/`](worksheet-p4/) | Token dua lapis (primitif dan semantik), tema terang dan gelap, tiga struktur semantik tambahan. |
-| P05 | Layout modern: Flexbox dan Grid | [`worksheet-p5/`](worksheet-p5/) | Kerangka grid tiga baris, sidebar 16rem, galeri `auto-fit`, navbar flex. |
-| P06 | Responsif mobile-first | [`worksheet-p6/`](worksheet-p6/) | `responsif.css`, titik henti 48rem dan 60rem, tabel yang bisa digulir. |
-| P08 | JavaScript modern ES6+, struktur data, array methods | [`worksheet-p8/`](worksheet-p8/) | Data halaman menjadi variabel, objek, dan array; tiga fungsi murni; `map`, `filter`, `find`. |
-| P09 | DOM, event, dan interaktivitas | [`worksheet-p9/`](worksheet-p9/) | Daftar proyek dirender dari data, filter kategori dengan satu pendengar di induk, validasi form per kolom. |
-
-## Struktur repositori
-
-```text
-PABW_25523053/
-├── README.md            # berkas ini
-├── worksheet-p4/        # profil.html, css/, media/, bukti/
-├── worksheet-p5/        # profil.html, css/, media/, bukti/
-├── worksheet-p6/        # profil.html, css/ (+ responsif.css), media/, bukti/
-├── worksheet-p8/
-└── worksheet-p9/
-└── worksheet-p10/
-    ├── profil.html
-    ├── css/             
-    ├── js/app.js        
-    ├── js/dom.js   
-    ├── js/api.js    
-    ├── media/
-    ├── bukti/          
-    └── lembar-jawaban.md 
-    
-```
-
 # Worksheet P10: JavaScript Asinkron (fetch, Promise, JSON)
 
 Pengembangan Aplikasi Berbasis Web (SIF302), Semester Gasal 2026/2027
@@ -56,50 +9,65 @@ Lanjutan `profil.html` dari Pertemuan 9. Satu bagian baru ("Contoh data dari API
 
 | Berkas | Peran |
 | --- | --- |
-| `js/api.js` (baru) | Satu-satunya tempat `fetch`. Alamat API, pemeriksaan `respons.ok`, `json()`, satu `try/catch`. Mengekspor `ambilTugas()`. |
-| `js/dom.js` | Pemanggil: `try/catch` kedua, empat keadaan antarmuka, render kartu. |
+| `js/api.js` (baru) | Satu-satunya tempat `fetch`. Alamat API, pemeriksaan `respons.ok`, `json()`, pemeriksaan bentuk data, satu `try/catch`. Mengekspor `ambilTugas()`. |
+| `js/dom.js` | Pemanggil: `try/catch` kedua, empat keadaan antarmuka, render kartu dengan `textContent`. |
 | `js/app.js` | Tidak diubah (data dan fungsi murni). |
 | `profil.html`, `css/komponen.css` | Menambah `<section id="data-api">` dan gaya pesan status. |
+| `bukti/` | Tangkapan layar empat keadaan antarmuka. |
 
-Catatan: `app.js` di proyek ini sengaja tidak menyentuh halaman (itu tugas `dom.js`), jadi pemanggil `api.js` saya taruh di `dom.js`, bukan di `app.js`.
+Catatan: `app.js` di proyek ini sengaja tidak menyentuh halaman (itu tugas `dom.js`), sehingga pemanggil `api.js` ditaruh di `dom.js`, bukan di `app.js`. Berkas `app.js` tetap seperti semula.
 
 ## API
 
 - Alamat: `https://dummyjson.com/todos?limit=6` (publik, tanpa kunci akses).
-- Alamat hanya ditulis di `js/api.js`, konstanta `ALAMAT`.
+- Alamat hanya ditulis di `js/api.js`, pada konstanta `ALAMAT`.
 - Bentuk balasan: `{ todos: [{ id, todo, completed, userId }], total, skip, limit }`.
-- Bila API tidak terjangkau dari jaringan kelas, pilihan cadangan: berkas `notisia.json` lokal (belum dipakai).
+- Cadangan bila API tidak terjangkau dari jaringan kelas: berkas `notisia.json` lokal (tidak dipakai karena API terjangkau).
 
 ## Cara menjalankan
 
-Modul ES tidak bisa dibuka lewat `file://`. Jalankan server lokal dari folder ini:
+Modul ES tidak dapat dibuka lewat `file://`. Jalankan server lokal dari folder `worksheet-p10`:
 
 ```bash
+cd worksheet-p10
 python3 -m http.server 8000
 ```
 
-Lalu buka `http://localhost:8000/profil.html`.
+Lalu buka `http://localhost:8000/profil.html`. Alternatif: Live Server di VS Code (klik kanan `profil.html`, pilih Open with Live Server).
+
+## Alur data
+
+1. `dom.js` memanggil `ambilTugas()` dan menampilkan teks "Memuat tugas...".
+2. `api.js` memanggil `fetch(ALAMAT)`, memeriksa `respons.ok`, membaca badan dengan `respons.json()`, lalu memastikan `data.todos` berupa larik.
+3. `api.js` mengembalikan larik `data.todos`, atau melempar `Error` dengan pesan yang dapat dibaca.
+4. `dom.js` menampilkan kartu, atau "Belum ada tugas." bila larik kosong, atau "Gagal memuat data: ..." bila ditolak.
 
 ## Penanganan galat
 
 | Kegagalan | Pesan di halaman |
 | --- | --- |
-| Jaringan mati atau alamat tidak ada | Gagal memuat data: jaringan tidak terjangkau |
+| Jaringan mati atau permintaan diblokir | Gagal memuat data: jaringan tidak terjangkau |
 | Status 404 atau 500 | Gagal memuat data: server membalas status 404 |
 | Badan bukan JSON | Gagal memuat data: balasan bukan JSON |
 | Balasan sah, bentuk tidak sesuai | Gagal memuat data: bentuk data tidak dikenali |
 | Balasan sah, larik kosong | Belum ada tugas. |
 
-## Bukti
+## Pengujian
 
-Tangkapan layar empat keadaan ada di folder `bukti/`: `p10-memuat.png`, `p10-berhasil.png`, `p10-gagal.png`, `p10-kosong.png`.
+| Keadaan | Cara saya memicu | Bukti |
+| --- | --- | --- |
+| Memuat | Throttling jaringan diperlambat di panel Network | `bukti/p10-memuat.png` |
+| Berhasil | Muat ulang dengan alamat benar | `bukti/p10-berhasil.png` |
+| Gagal | Memblokir domain API di panel Network, lalu muat ulang | `bukti/p10-gagal.png` |
+| Kosong | Alamat sementara diberi `&skip=1000`, lalu dikembalikan | `bukti/p10-kosong.png` |
+
+Setelah pengujian, alamat dan pengaturan jaringan dikembalikan seperti semula.
 
 ## Pengungkapan penggunaan AI
 
 - Dibantu AI (Claude, Anthropic): rancangan awal `js/api.js`, blok P10 di akhir `js/dom.js`, section HTML dan CSS tambahan, serta draf jawaban lembar.
-- Saya kerjakan sendiri: menjalankan dan mengamati pengujian empat keadaan di peramban, mengambil tangkapan layar, memeriksa panel Network dan Console, serta menyunting dan memahami setiap baris kode di atas.
-- Topik dan isi halaman ini milik saya sendiri tidak menyalin pekerjaan mahasiswa lain
-
+- Saya kerjakan sendiri: menjalankan dan mengamati pengujian empat keadaan di peramban, memeriksa panel Network dan Console, mengambil tangkapan layar, serta menyunting dan memahami setiap baris kode di atas.
+- Topik dan isi halaman ini milik saya sendiri; saya tidak menyalin pekerjaan mahasiswa lain.
 
 
 ## Cara menjalankan
