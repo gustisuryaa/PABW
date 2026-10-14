@@ -1,0 +1,238 @@
+/* ==================================================================
+   KOMPONEN.CSS — Lembar G: form, fokus, isian tidak sah + gaya
+   untuk tiga struktur tambahan (details, dl, ol/time)
+   ================================================================== */
+
+/* ---- Tabel ---- */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+caption {
+  text-align: left;
+  font-weight: 600;
+  padding-block-end: var(--space-2);
+}
+th, td {
+  text-align: left;
+  overflow-wrap: anywhere;   /* tabel tidak boleh lebih lebar dari kolomnya di 360 px */
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ---- Form ---- */
+form fieldset {
+  min-width: 0; /* bawaan peramban min-content: fieldset melebar melewati kolom sempit */
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+form legend {
+  font-weight: 700;
+  padding-inline: var(--space-2);
+}
+form p {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: none; /* form kolom tidak dibatasi 60ch seperti paragraf isi */
+}
+
+label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+input, textarea, button {
+  font: inherit; /* kolom isian ikut ukuran huruf halaman */
+}
+
+input, textarea {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-fg);
+}
+
+/* Hanya kolom isian di dalam form. Kalau dipasang ke semua input, kotak
+   centang tema yang tersembunyi ikut melebar 100% dan memicu scroll samping. */
+form input, form textarea {
+  width: 100%;
+  min-width: 0; /* lebar bawaan input (size=20) tidak boleh melebihi kolom */
+}
+
+#nim-bantuan {
+  font-size: var(--text-sm);
+  color: var(--color-fg);
+}
+
+button {
+  align-self: flex-start;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  cursor: pointer;
+}
+button:hover { filter: brightness(1.1); }
+
+/* ---- Keadaan fokus: wajib terlihat untuk navigasi papan ketik ---- */
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* ---- Isian tidak sah: HANYA setelah disentuh pengguna ---- */
+input:user-invalid {
+  border-color: var(--color-danger);
+  border-width: 2px;
+}
+
+/* ---- Foto karya di dalam kartu (section #karya) ---- */
+.kartu-foto {
+  display: flex;
+  flex-direction: column;
+  flex: 1;                   /* isi mengisi tinggi kartu */
+  gap: var(--space-2);
+  min-width: 0;              /* izinkan menyusut (kasus E.2) */
+}
+.kartu-foto img {
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;         /* isi kartu tetap seragam walau rasio foto beda */
+  border-radius: var(--radius-md);
+}
+.kartu-foto figcaption {
+  overflow-wrap: anywhere;   /* teks panjang membungkus, tidak mendorong kolom */
+  font-size: var(--text-sm);
+  color: var(--color-fg);
+}
+
+/* ==================================================================
+   Struktur tambahan (Lembar B.3)
+   ================================================================== */
+
+/* Pilihan 3 — lini masa (#lini-masa) */
+.lini {
+  list-style: none;
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.lini time {
+  font-weight: 700;
+  color: var(--color-primary);
+  display: block;
+}
+
+/* Pilihan 4 — keterampilan (#keterampilan) */
+.keterampilan {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.keterampilan dt {
+  font-weight: 700;
+}
+.keterampilan dd {
+  padding-inline-start: var(--space-4);
+  color: var(--color-fg);
+}
+
+/* Pilihan 1 — tanya jawab (#tanya-jawab) */
+#tanya-jawab details {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+}
+#tanya-jawab summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+#tanya-jawab summary::marker {
+  color: var(--color-primary);
+}
+
+/* ==================================================================
+   Pertemuan 9: filter proyek, kartu proyek, pesan galat form
+   ================================================================== */
+
+/* ---- Baris tombol filter ---- */
+#filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+#filter button {
+  background: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* Penanda tombol aktif: nama kelas harus sama dengan yang ditulis JavaScript.
+   Isi warna ditambahkan supaya tidak hanya bergantung pada garis tepi. */
+.aktif {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+#filter button.aktif {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+/* Cincin fokus papan ketik tidak boleh tertimpa penanda aktif */
+#filter button.aktif:focus-visible {
+  outline-color: var(--color-focus);
+}
+
+/* ---- Daftar proyek hasil render ---- */
+#daftar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: var(--space-3);
+  list-style: none;
+  padding: 0;
+}
+.kartu-proyek {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-1);
+  padding: var(--card-pad);
+}
+.kartu-proyek span {
+  font-size: var(--text-sm);
+}
+
+/* ---- Pesan galat per kolom dan pesan sukses ---- */
+.galat {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-danger);
+}
+input[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--color-danger);
+  border-width: 2px;
+}
+#status-kirim {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
