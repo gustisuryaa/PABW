@@ -33,9 +33,14 @@ export function simpan(state) {
 
 export function muat() {
   try {
-    return JSON.parse(localStorage.getItem(KUNCI));
+    const isi = JSON.parse(localStorage.getItem(KUNCI));
+    if (isi?.versi !== VERSI) {
+      localStorage.removeItem(KUNCI); // bentuk lama atau tidak ada: buang
+      return null;
+    }
+    return isi;
   } catch {
-    localStorage.removeItem(KUNCI); // simpanan rusak: pakai nilai bawaan
+    localStorage.removeItem(KUNCI); // isi rusak: buang
     return null;
   }
 }
