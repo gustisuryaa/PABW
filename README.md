@@ -1,3 +1,30 @@
+## Pertemuan 11 — Modul, State, dan Penyimpanan Klien
+
+Folder: `worksheet-p11/` (lanjutan `profil.html` dari Pertemuan 9; `api.js` dibawa dari Pertemuan 10).
+
+**Struktur modul**
+
+| Berkas | Tanggung jawab |
+|---|---|
+| `js/data.js` | Data mentah, fungsi murni pemformat, aturan validasi |
+| `js/state.js` | Objek `state`, fungsi pengubah, simpan/muat `localStorage` |
+| `js/dom.js` | Seluruh sentuhan ke halaman: pemilih, `render(state)`, kelas |
+| `js/events.js` | Pemasangan seluruh pendengar peristiwa |
+| `js/app.js` | Perakit: hanya impor dan pemanggilan |
+| `js/api.js` | Bawaan Pertemuan 10, tidak diubah; satu-satunya berkas yang memanggil `fetch` (dihitung terpisah dari lima modul) |
+
+**Yang disimpan di localStorage:** hanya kategori filter aktif (kunci `pabw-p11`, `versi: 2`).
+**Sengaja tidak disimpan:** isi formulir kontak (nama, email, NIM, pesan) karena data pribadi dan localStorage tidak terenkripsi.
+
+**Versi Node.js (pekerjaan rumah sebelum Pertemuan 12)**
+- `node -v`: [ISI hasil dari terminalmu]
+- `npm -v`: [ISI hasil dari terminalmu]
+
+**Deklarasi penggunaan AI**
+- Dibantu AI (Claude): menyusun draf kode pemecahan lima modul, fungsi pengubah, penyimpanan localStorage, dan penanganan simpanan rusak dan draf penjelasan langkah per lembar
+- Dikerjakan sendiri: testing dan mengerjakan serta menjawab soal di worksheet
+
+
 # Worksheet P10: JavaScript Asinkron (fetch, Promise, JSON)
 
 Pengembangan Aplikasi Berbasis Web (SIF302), Semester Gasal 2026/2027
