@@ -1,27 +1,26 @@
-import { profil, daftarProyek, formatKeahlian, saringKategori } from "./app.js";
+// dom.js (tahap B): seluruh sentuhan ke halaman.
+import { formatKeahlian, aturanKolom } from "./data.js";
+import { ambilTugas } from "./api.js";
 
-
-// Lembar A: cari elemen dulu, simpan di variabel (tabel A.3)
 const elemenNama = document.querySelector(".kepala h1");
 const elemenTagline = document.querySelector(".kepala .tagline");
 const elemenKeahlian = document.querySelector("#daftar-keahlian");
 const wadahProyek = document.querySelector("#daftar");
-const barisFilter = document.querySelector("#filter");
 const pesanKosong = document.querySelector("#pesan-kosong");
-const formulir = document.querySelector("#kontak form");
-const kolomFormulir = formulir.querySelectorAll("input, textarea"); // NodeList: 4 kolom
+export const barisFilter = document.querySelector("#filter");
+export const formulir = document.querySelector("#kontak form");
+const kolomFormulir = formulir.querySelectorAll("input, textarea");
 const tombolKirim = formulir.querySelector('button[type="submit"]');
 const statusKirim = document.querySelector("#status-kirim");
+const wadahTugas = document.querySelector("#daftar-tugas");
+const statusTugas = document.querySelector("#status-tugas");
 
-
-document.title = `Profil ${profil.nama} - PABW 2026/2027`;
-elemenNama.textContent = profil.nama;
-elemenTagline.textContent = `${profil.peran}.`;
-elemenKeahlian.textContent = formatKeahlian(profil.keahlian);
-
-
-// Lembar B dan D.1: render daftar proyek dari data
-
+export function renderIdentitas(profil) {
+  document.title = `Profil ${profil.nama} - PABW 2026/2027`;
+  elemenNama.textContent = profil.nama;
+  elemenTagline.textContent = `${profil.peran}.`;
+  elemenKeahlian.textContent = formatKeahlian(profil.keahlian);
+}
 
 function buatKartu(proyek) {
   const kartu = document.createElement("li");
@@ -38,64 +37,35 @@ function buatKartu(proyek) {
   return kartu;
 }
 
+export function renderProyek(daftar) {
+  wadahProyek.textContent = "";
 
-function renderProyek(daftar) {
-  wadahProyek.textContent = ""; 
-
-  if (daftar.length === 0) {    
+  if (daftar.length === 0) {
     pesanKosong.hidden = false;
     return;
   }
   pesanKosong.hidden = true;
 
-  const fragmen = document.createDocumentFragment(); 
+  const fragmen = document.createDocumentFragment();
   daftar.forEach((proyek) => fragmen.append(buatKartu(proyek)));
-  wadahProyek.append(fragmen);  
+  wadahProyek.append(fragmen);
 }
 
-
-// Lembar C: satu pendengar di induk untuk semua tombol filter
-
-function tandaiTombolAktif(tombolAktif) {
+export function tandaiTombolAktif(tombolAktif) {
   barisFilter.querySelectorAll("button").forEach((tombol) => {
     const aktif = tombol === tombolAktif;
-    tombol.classList.toggle("aktif", aktif);          
-    tombol.setAttribute("aria-pressed", String(aktif)); 
+    tombol.classList.toggle("aktif", aktif);
+    tombol.setAttribute("aria-pressed", String(aktif));
   });
 }
 
-// Dipasang SEKALI, di luar renderProyek, pada induknya (#filter).
-barisFilter.addEventListener("click", (event) => {
-  const tombol = event.target.closest("button"); // klik bisa jatuh di anak tombol
-  if (!tombol) return;                           // klik di sela tombol: abaikan
+export const tombolSemua = () => barisFilter.querySelector('[data-kategori="semua"]');
 
-  renderProyek(saringKategori(daftarProyek, tombol.dataset.kategori));
-  tandaiTombolAktif(tombol);
-});
-
-
-renderProyek(daftarProyek);
-tandaiTombolAktif(barisFilter.querySelector('[data-kategori="semua"]'));
-
-
-// Lembar D.2: validasi form (aturan disimpan sebagai data)
-
-const aturanKolom = {
-  nama:  { sah: (isi) => isi.length >= 2,
-           pesan: "Nama belum diisi. Tulis nama lengkap Anda, minimal 2 huruf." },
-  email: { sah: (isi) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(isi),
-           pesan: "Alamat email belum lengkap. Tulis seperti nama@contoh.com." },
-  nim:   { sah: (isi) => /^\d{8}$/.test(isi),
-           pesan: "NIM harus 8 digit angka, contoh 25523053." },
-  pesan: { sah: (isi) => isi.length >= 10,
-           pesan: "Pesan terlalu singkat. Tulis minimal 10 karakter." },
-};
-
+// ---------- form kontak ----------
 
 const kolomSah = (kolom) => aturanKolom[kolom.name].sah(kolom.value.trim());
 
-
-function tampilkanStatusKolom(kolom) {
+export function tampilkanStatusKolom(kolom) {
   const sah = kolomSah(kolom);
   const tempatGalat = formulir.querySelector(`#${kolom.id}-galat`);
 
@@ -104,46 +74,65 @@ function tampilkanStatusKolom(kolom) {
   if (sah) {
     kolom.removeAttribute("aria-invalid");
   } else {
-    kolom.setAttribute("aria-invalid", "true"); 
+    kolom.setAttribute("aria-invalid", "true");
   }
   return sah;
 }
 
-const semuaKolomSah = () => Array.from(kolomFormulir).every(kolomSah);
+export const semuaKolomSah = () => Array.from(kolomFormulir).every(kolomSah);
 
-
-formulir.noValidate = true;
-
-
-formulir.addEventListener("input", (event) => {
-  const kolom = event.target.closest("input, textarea");
-  if (!kolom) return;
-
-  if (kolom.hasAttribute("aria-invalid")) tampilkanStatusKolom(kolom);
+export function perbaruiTombolKirim() {
   tombolKirim.disabled = !semuaKolomSah();
-  statusKirim.hidden = true; 
-});
+  statusKirim.hidden = true;
+}
 
-
-formulir.addEventListener("focusout", (event) => {
-  const kolom = event.target.closest("input, textarea");
-  if (kolom) tampilkanStatusKolom(kolom);
-});
-
-formulir.addEventListener("submit", (event) => {
-  event.preventDefault(); 
-
+export function tanganiKirim() {
   kolomFormulir.forEach(tampilkanStatusKolom);
   const kolomBermasalah = formulir.querySelector('[aria-invalid="true"]');
   if (kolomBermasalah) {
-    kolomBermasalah.focus(); 
+    kolomBermasalah.focus();
     return;
   }
-
   const namaPengirim = formulir.elements.nama.value.trim();
   formulir.reset();
   tombolKirim.disabled = false;
   statusKirim.textContent = `Terima kasih, ${namaPengirim}. Pesan Anda sudah dicatat (simulasi: belum ada server yang menerimanya).`;
   statusKirim.hidden = false;
-});
+}
 
+export const kolomDariEvent = (event) => event.target.closest("input, textarea");
+
+// ---------- data tugas dari jaringan (kode P10, belum dipindah ke state) ----------
+
+function gambarTugas(daftar) {
+  wadahTugas.textContent = "";
+  daftar.forEach((tugas) => {
+    const kartu = document.createElement("li");
+    kartu.className = "kartu-proyek";
+
+    const judul = document.createElement("strong");
+    judul.textContent = tugas.todo;
+
+    const keterangan = document.createElement("span");
+    keterangan.textContent = tugas.completed ? "selesai" : "belum selesai";
+
+    kartu.append(judul, keterangan);
+    wadahTugas.append(kartu);
+  });
+}
+
+export async function tampilkanTugas() {
+  wadahTugas.textContent = "";
+  statusTugas.textContent = "Memuat tugas...";
+  try {
+    const daftar = await ambilTugas();
+    if (daftar.length === 0) {
+      statusTugas.textContent = "Belum ada tugas.";
+      return;
+    }
+    statusTugas.textContent = "";
+    gambarTugas(daftar);
+  } catch (galat) {
+    statusTugas.textContent = "Gagal memuat data: " + galat.message;
+  }
+}

@@ -193,13 +193,13 @@ input:user-invalid {
 }
 
 /* ---- Daftar proyek hasil render ---- */
-#daftar {
+#daftar,
+#daftar-tugas {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
   gap: var(--space-3);
-  list-style: none;
-  padding: 0;
 }
+
 .kartu-proyek {
   display: flex;
   flex-direction: column;
@@ -235,4 +235,17 @@ textarea[aria-invalid="true"] {
 button:disabled {
   opacity: 0.55;
   cursor: not-allowed;
+}
+
+/* Pertemuan 10: pesan status data dari jaringan */
+#status-tugas {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+/* wadah status kosong tidak menampilkan kotak */
+#status-tugas:empty {
+  display: none;
 }
