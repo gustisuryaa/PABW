@@ -177,6 +177,14 @@ input:user-invalid {
   border-color: var(--color-primary);
 }
 
+/* ---- Tombol atur ulang (P11): tampil sebagai aksi sekunder, beda dari tombol filter ---- */
+#atur-ulang {
+  background: transparent;
+  color: var(--color-primary);
+  border-color: transparent;
+  text-decoration: underline;
+}
+
 /* Penanda tombol aktif: nama kelas harus sama dengan yang ditulis JavaScript.
    Isi warna ditambahkan supaya tidak hanya bergantung pada garis tepi. */
 .aktif {
@@ -198,8 +206,9 @@ input:user-invalid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
   gap: var(--space-3);
+  list-style: none;
+  padding: 0;
 }
-
 .kartu-proyek {
   display: flex;
   flex-direction: column;

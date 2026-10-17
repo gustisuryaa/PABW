@@ -13,6 +13,10 @@ export const daftarProyek = [
   { judul: "SQLQuest", tahun: 2026, selesai: false, kategori: "mobile" },
 ];
 
+// daftar kategori yang sah; dipakai untuk memeriksa nilai dari simpanan
+export const daftarKategori = ["semua", "web", "mobile", "desain"];
+export const kategoriBawaan = "semua";
+
 export const buatPerkenalan = ({ nama, peran }) => `${nama}, ${peran}.`;
 
 export const formatKeahlian = (daftar) => daftar.join(" · ");

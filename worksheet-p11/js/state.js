@@ -1,12 +1,15 @@
-// state.js: satu objek state dan fungsi pengubahnya.
-import { profil, daftarProyek, aturanKolom } from "./data.js";
+// state.js: satu objek state, fungsi pengubahnya, dan penyimpanan pilihan.
+import { profil, daftarProyek, daftarKategori, kategoriBawaan, aturanKolom } from "./data.js";
 import { ambilTugas } from "./api.js";
 import { render, renderFilter, renderFormulir, renderTugas } from "./dom.js";
+
+const KUNCI = "pabw-p11";
+const VERSI = 2;
 
 export const state = {
   profil,
   daftarProyek,
-  kategoriAktif: "semua",
+  kategoriAktif: kategoriBawaan,
   // data dari jaringan (P10): status = "memuat" | "sukses" | "kosong" | "gagal"
   tugas: { status: "memuat", daftar: [], pesanGalat: "" },
   kontak: {
@@ -17,6 +20,32 @@ export const state = {
   },
 };
 
+// ---------- penyimpanan (hanya pilihan tampilan; lihat catatan E.4) ----------
+
+export function simpan(state) {
+  const isi = { versi: VERSI, kategoriAktif: state.kategoriAktif };
+  try {
+    localStorage.setItem(KUNCI, JSON.stringify(isi));
+  } catch {
+    // penyimpanan penuh atau diblokir: halaman tetap jalan tanpa mengingat
+  }
+}
+
+export function muat() {
+  try {
+    return JSON.parse(localStorage.getItem(KUNCI));
+  } catch {
+    localStorage.removeItem(KUNCI); // simpanan rusak: pakai nilai bawaan
+    return null;
+  }
+}
+
+// dipanggil sekali saat halaman dimuat, sebelum render pertama
+export function pulihkanDariSimpanan() {
+  const kategori = muat()?.kategoriAktif;
+  state.kategoriAktif = daftarKategori.includes(kategori) ? kategori : kategoriBawaan;
+}
+
 // ---------- fungsi pengubah: satu-satunya pintu masuk perubahan state ----------
 
 function gambarUlangDaftar() {
@@ -25,7 +54,15 @@ function gambarUlangDaftar() {
 }
 
 export function pilihKategori(nilai) {
+  if (!daftarKategori.includes(nilai)) return;
   state.kategoriAktif = nilai;
+  simpan(state);
+  gambarUlangDaftar();
+}
+
+export function aturUlang() {
+  localStorage.removeItem(KUNCI);
+  state.kategoriAktif = kategoriBawaan;
   gambarUlangDaftar();
 }
 

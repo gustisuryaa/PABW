@@ -13,6 +13,7 @@ const wadahTugas = document.querySelector("#daftar-tugas");
 const statusTugas = document.querySelector("#status-tugas");
 
 export const barisFilter = document.querySelector("#filter");
+export const tombolAturUlang = document.querySelector("#atur-ulang");
 export const formulir = document.querySelector("#kontak form");
 
 formulir.noValidate = true;

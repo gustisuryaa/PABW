@@ -1,7 +1,7 @@
 // events.js: pemasangan seluruh pendengar peristiwa. Tidak mengubah state langsung.
-import { pilihKategori, ubahKolom, periksaKolom, kirimFormulir } from "./state.js";
+import { pilihKategori, aturUlang, ubahKolom, periksaKolom, kirimFormulir } from "./state.js";
 import {
-  barisFilter, formulir,
+  barisFilter, tombolAturUlang, formulir,
   bacaIsiFormulir, kolomDariEvent, fokuskanKolom, kosongkanFormulir,
 } from "./dom.js";
 
@@ -12,6 +12,8 @@ export function pasangPendengar() {
     if (!tombol) return;
     pilihKategori(tombol.dataset.kategori);
   });
+
+  tombolAturUlang.addEventListener("click", () => aturUlang());
 
   formulir.addEventListener("input", (event) => {
     const kolom = kolomDariEvent(event);
