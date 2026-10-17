@@ -1,36 +1,35 @@
-// events.js (tahap B): pemasangan seluruh pendengar peristiwa.
-import { state, pilihKategori } from "./state.js";
-import { saringKategori } from "./data.js";
+// events.js: pemasangan seluruh pendengar peristiwa. Tidak mengubah state langsung.
+import { pilihKategori, ubahKolom, periksaKolom, kirimFormulir } from "./state.js";
 import {
-  barisFilter, formulir, renderProyek, tandaiTombolAktif,
-  tampilkanStatusKolom, perbaruiTombolKirim, tanganiKirim, kolomDariEvent,
+  barisFilter, formulir,
+  bacaIsiFormulir, kolomDariEvent, fokuskanKolom, kosongkanFormulir,
 } from "./dom.js";
 
 export function pasangPendengar() {
+  // satu pendengar di induk untuk semua tombol filter
   barisFilter.addEventListener("click", (event) => {
-    const tombol = event.target.closest("button");
+    const tombol = event.target.closest("button"); // klik bisa jatuh di anak tombol
     if (!tombol) return;
     pilihKategori(tombol.dataset.kategori);
-    renderProyek(saringKategori(state.daftarProyek, state.kategoriAktif));
-    tandaiTombolAktif(tombol);
   });
-
-  formulir.noValidate = true;
 
   formulir.addEventListener("input", (event) => {
     const kolom = kolomDariEvent(event);
-    if (!kolom) return;
-    if (kolom.hasAttribute("aria-invalid")) tampilkanStatusKolom(kolom);
-    perbaruiTombolKirim();
+    if (kolom) ubahKolom(kolom.name, bacaIsiFormulir());
   });
 
   formulir.addEventListener("focusout", (event) => {
     const kolom = kolomDariEvent(event);
-    if (kolom) tampilkanStatusKolom(kolom);
+    if (kolom) periksaKolom(kolom.name, bacaIsiFormulir());
   });
 
   formulir.addEventListener("submit", (event) => {
     event.preventDefault();
-    tanganiKirim();
+    const kolomBermasalah = kirimFormulir(bacaIsiFormulir());
+    if (kolomBermasalah) {
+      fokuskanKolom(kolomBermasalah);
+    } else {
+      kosongkanFormulir();
+    }
   });
 }

@@ -1,19 +1,23 @@
-// dom.js (tahap B): seluruh sentuhan ke halaman.
-import { formatKeahlian, aturanKolom } from "./data.js";
-import { ambilTugas } from "./api.js";
+// dom.js: seluruh sentuhan ke halaman. Hanya membaca state yang diberikan, tidak menyimpan state.
+import { formatKeahlian, saringKategori, aturanKolom } from "./data.js";
 
 const elemenNama = document.querySelector(".kepala h1");
 const elemenTagline = document.querySelector(".kepala .tagline");
 const elemenKeahlian = document.querySelector("#daftar-keahlian");
 const wadahProyek = document.querySelector("#daftar");
 const pesanKosong = document.querySelector("#pesan-kosong");
-export const barisFilter = document.querySelector("#filter");
-export const formulir = document.querySelector("#kontak form");
-const kolomFormulir = formulir.querySelectorAll("input, textarea");
-const tombolKirim = formulir.querySelector('button[type="submit"]');
+const kolomFormulir = document.querySelectorAll("#kontak input, #kontak textarea");
+const tombolKirim = document.querySelector('#kontak button[type="submit"]');
 const statusKirim = document.querySelector("#status-kirim");
 const wadahTugas = document.querySelector("#daftar-tugas");
 const statusTugas = document.querySelector("#status-tugas");
+
+export const barisFilter = document.querySelector("#filter");
+export const formulir = document.querySelector("#kontak form");
+
+formulir.noValidate = true;
+
+// ---------- identitas ----------
 
 export function renderIdentitas(profil) {
   document.title = `Profil ${profil.nama} - PABW 2026/2027`;
@@ -21,6 +25,8 @@ export function renderIdentitas(profil) {
   elemenTagline.textContent = `${profil.peran}.`;
   elemenKeahlian.textContent = formatKeahlian(profil.keahlian);
 }
+
+// ---------- daftar proyek ----------
 
 function buatKartu(proyek) {
   const kartu = document.createElement("li");
@@ -37,102 +43,87 @@ function buatKartu(proyek) {
   return kartu;
 }
 
-export function renderProyek(daftar) {
-  wadahProyek.textContent = "";
+const saring = (state) => saringKategori(state.daftarProyek, state.kategoriAktif);
 
-  if (daftar.length === 0) {
+export function render(state) {
+  wadahProyek.textContent = "";            // 1. kosongkan
+  const tampil = saring(state);            // dari state, bukan argumen
+  if (tampil.length === 0) {               // 2. keadaan kosong
     pesanKosong.hidden = false;
     return;
   }
   pesanKosong.hidden = true;
 
   const fragmen = document.createDocumentFragment();
-  daftar.forEach((proyek) => fragmen.append(buatKartu(proyek)));
-  wadahProyek.append(fragmen);
+  tampil.forEach((proyek) => fragmen.append(buatKartu(proyek)));
+  wadahProyek.append(fragmen);             // 3. isi ulang
 }
 
-export function tandaiTombolAktif(tombolAktif) {
+export function renderFilter(state) {
   barisFilter.querySelectorAll("button").forEach((tombol) => {
-    const aktif = tombol === tombolAktif;
+    const aktif = tombol.dataset.kategori === state.kategoriAktif;
     tombol.classList.toggle("aktif", aktif);
     tombol.setAttribute("aria-pressed", String(aktif));
   });
 }
 
-export const tombolSemua = () => barisFilter.querySelector('[data-kategori="semua"]');
+// ---------- data tugas dari jaringan ----------
+
+// isi dari jaringan dipasang dengan textContent, bukan innerHTML
+function buatKartuTugas(tugas) {
+  const kartu = document.createElement("li");
+  kartu.className = "kartu-proyek";
+
+  const judul = document.createElement("strong");
+  judul.textContent = tugas.todo;
+
+  const keterangan = document.createElement("span");
+  keterangan.textContent = tugas.completed ? "selesai" : "belum selesai";
+
+  kartu.append(judul, keterangan);
+  return kartu;
+}
+
+const pesanStatusTugas = { memuat: "Memuat tugas...", kosong: "Belum ada tugas.", sukses: "" };
+
+export function renderTugas({ tugas }) {
+  wadahTugas.textContent = "";
+  statusTugas.textContent = tugas.status === "gagal"
+    ? `Gagal memuat data: ${tugas.pesanGalat}`
+    : pesanStatusTugas[tugas.status];
+
+  const fragmen = document.createDocumentFragment();
+  tugas.daftar.forEach((item) => fragmen.append(buatKartuTugas(item)));
+  wadahTugas.append(fragmen);
+}
 
 // ---------- form kontak ----------
 
-const kolomSah = (kolom) => aturanKolom[kolom.name].sah(kolom.value.trim());
+export function renderFormulir({ kontak }) {
+  kolomFormulir.forEach((kolom) => {
+    const adaGalat = kontak.galat[kolom.name];
+    const tempatGalat = document.querySelector(`#${kolom.id}-galat`);
 
-export function tampilkanStatusKolom(kolom) {
-  const sah = kolomSah(kolom);
-  const tempatGalat = formulir.querySelector(`#${kolom.id}-galat`);
+    tempatGalat.textContent = adaGalat ? aturanKolom[kolom.name].pesan : "";
+    tempatGalat.hidden = !adaGalat;
+    if (adaGalat) {
+      kolom.setAttribute("aria-invalid", "true");
+    } else {
+      kolom.removeAttribute("aria-invalid");
+    }
+  });
 
-  tempatGalat.textContent = sah ? "" : aturanKolom[kolom.name].pesan;
-  tempatGalat.hidden = sah;
-  if (sah) {
-    kolom.removeAttribute("aria-invalid");
-  } else {
-    kolom.setAttribute("aria-invalid", "true");
-  }
-  return sah;
+  tombolKirim.disabled = kontak.tombolNonaktif;
+  statusKirim.textContent = kontak.pesanStatus;
+  statusKirim.hidden = kontak.pesanStatus === "";
 }
 
-export const semuaKolomSah = () => Array.from(kolomFormulir).every(kolomSah);
-
-export function perbaruiTombolKirim() {
-  tombolKirim.disabled = !semuaKolomSah();
-  statusKirim.hidden = true;
-}
-
-export function tanganiKirim() {
-  kolomFormulir.forEach(tampilkanStatusKolom);
-  const kolomBermasalah = formulir.querySelector('[aria-invalid="true"]');
-  if (kolomBermasalah) {
-    kolomBermasalah.focus();
-    return;
-  }
-  const namaPengirim = formulir.elements.nama.value.trim();
-  formulir.reset();
-  tombolKirim.disabled = false;
-  statusKirim.textContent = `Terima kasih, ${namaPengirim}. Pesan Anda sudah dicatat (simulasi: belum ada server yang menerimanya).`;
-  statusKirim.hidden = false;
-}
+// nilai keempat kolom form, sudah di-trim: {nama, email, nim, pesan}
+export const bacaIsiFormulir = () =>
+  Object.fromEntries(Array.from(kolomFormulir, (kolom) => [kolom.name, kolom.value.trim()]));
 
 export const kolomDariEvent = (event) => event.target.closest("input, textarea");
 
-// ---------- data tugas dari jaringan (kode P10, belum dipindah ke state) ----------
+export const fokuskanKolom = (nama) => formulir.elements[nama].focus();
 
-function gambarTugas(daftar) {
-  wadahTugas.textContent = "";
-  daftar.forEach((tugas) => {
-    const kartu = document.createElement("li");
-    kartu.className = "kartu-proyek";
-
-    const judul = document.createElement("strong");
-    judul.textContent = tugas.todo;
-
-    const keterangan = document.createElement("span");
-    keterangan.textContent = tugas.completed ? "selesai" : "belum selesai";
-
-    kartu.append(judul, keterangan);
-    wadahTugas.append(kartu);
-  });
-}
-
-export async function tampilkanTugas() {
-  wadahTugas.textContent = "";
-  statusTugas.textContent = "Memuat tugas...";
-  try {
-    const daftar = await ambilTugas();
-    if (daftar.length === 0) {
-      statusTugas.textContent = "Belum ada tugas.";
-      return;
-    }
-    statusTugas.textContent = "";
-    gambarTugas(daftar);
-  } catch (galat) {
-    statusTugas.textContent = "Gagal memuat data: " + galat.message;
-  }
-}
+export const kosongkanFormulir = () => formulir.reset();
