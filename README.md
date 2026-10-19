@@ -591,4 +591,6 @@ nilai token saya tentukan sendiri berdasarkan foto profil. Saya
 memakai AI untuk: (1) memeriksa kontras WCAG pasangan warna token di
 kedua tema secara numerik, (2) menemukan bahwa teks tombol putih di
 atas --color-primary versi tema gelap gagal kontras AA, dan (3)
-menyarankan token --color-on-primary sebagai perbaikan. (4) membantu menemukan kesalahan dan bug (5) membantu brainstroming dan membantu membetulkan error dan bug di browser agar web bisa menjadi tema gelap/terang
+menyarankan token --color-on-primary sebagai perbaikan. (4) membantu menemukan kesalahan dan bug (5) membantu brainstroming dan membantu membetulkan error dan bug di browser agar web bisa menjadi tema gelap/terang.
+
+
