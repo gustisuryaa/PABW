@@ -1,20 +1,35 @@
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 import KepalaProfil from './components/KepalaProfil.vue'
 import TombolFilter from './components/TombolFilter.vue'
 import DaftarProyek from './components/DaftarProyek.vue'
 import FormKontak from './components/FormKontak.vue'
-import { profil, formatKeahlian } from './data.js'
+import { profil, formatKeahlian, daftarKategori, kategoriBawaan } from './data.js'
 import { state, muatTugas } from './state.js'
+import { muat, simpan, aturUlang } from './simpanan.js'
 
 // props untuk KepalaProfil: hanya yang dibutuhkan header
 const identitas = { nama: profil.nama, peran: profil.peran }
 const keahlian = formatKeahlian(profil.keahlian)
 
-// Lembar D: onMounted hanya memuat data tugas. Penyimpanan pilihan baru ditambahkan di Lembar E.
+// ---------- simpanan: dua kait dan satu tombol ----------
+
 onMounted(() => {
+  const isi = muat() // versi diperiksa di dalam muat()
+  // nilai dari simpanan bisa diubah lewat DevTools, jadi dicocokkan dulu dengan daftar yang sah
+  if (daftarKategori.includes(isi?.kategoriAktif)) state.kategoriAktif = isi.kategoriAktif
   muatTugas()
 })
+
+// hanya kategoriAktif yang disimpan, jadi hanya itu yang diawasi
+// (mengawasi seluruh state akan ikut menulis ulang simpanan saat data tugas tiba)
+watch(() => state.kategoriAktif, () => simpan(state))
+
+function aturUlangPilihan() {
+  aturUlang()
+  state.kategoriAktif = kategoriBawaan
+  simpan(state) // tulis ulang nilai bawaan; watch tidak berjalan bila kategori sudah "semua"
+}
 
 // ---------- data tugas dari jaringan (P10) ----------
 
@@ -136,7 +151,7 @@ const pesanTugas = computed(() =>
       </ul>
       <h3>Daftar proyek</h3>
       <TombolFilter />
-      <p><button type="button" id="atur-ulang">Atur ulang pilihan</button></p>
+      <p><button type="button" id="atur-ulang" @click="aturUlangPilihan">Atur ulang pilihan</button></p>
       <DaftarProyek />
     </section>
 
